@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
 
 \title{Cryptographic Algorithms and Protocols for Distributed Ledgers}
 \author{Kupriyanov K.I.\\Avdoshin S.M.}
@@ -10,6 +11,17 @@
 \begin{document}
 
 \maketitle
+\begin{enumerate}
+    \item Abastract
+    \item Introduction --- 333 w
+    \item Technical Aspects --- 238 w
+    \item Problem Statement --- 275 w
+    \item Preliminary Literature Preview --- 150 w
+    \item Methodology --- 550 w
+    \item Conclusion --- 200 w
+    \item References
+\end{enumerate}
+        --- 1600 w
 
 \section*{RAW Abstract}
 The Blockchain technology is commonly associated with Bitcoin, since it was the
@@ -30,7 +42,180 @@ have the same functionality, but different metrics must be used in order to
 measure them. There are also algorithms, which are not yet known to public.\\
 
 \section{Introduction}
+Recent years have witnessed a growing academic interest in cryptocurrencies,
+blockchains and distributed ledgers$^{\autoref{sec:ta}}$. The past ten years
+have shown that the advance in the field of studying distributed ledgers and
+cryptocurrencies is enormous, compared to any other field in the past. One of
+the results of the growing interest is thousands of researches carried out by
+scientists and individuals. These researches initiated the creation of hundreds
+cryptocurrencies and other uses of distributed ledgers. Some cryptocurrencies
+repeat each other in the form of algorithms (hashing, crypto-) and protocols
+used, but their spectrum is vast. Relatively little research has been carried
+out on the algorithms used, and even less on protocols. The generalisability of
+much published research on this issue is problematic. While most websites provide
+non-scientific explanations, there is one study [1]TODOcitation, that does provide
+some aggregation of information on algorithms and protocols in distributed
+ledgers. However, firstly, a number of technical and essential questions remain
+about the classification of algorithms and protocols for distributed ledgers,
+and secondly, it had only been carried in 2014, which makes the information in
+it obsolete. New algorithms, modern applications of old algorithms, new
+cryptocurrencies and their protocols are released every year, and nowadays
+there is quite a room for expancing in that area. This prospective study is
+designed to investigate the use of modern algorithms and protocols in
+distributed ledgers, and to make their up-to-date classification. The goal is
+to extend the existent classification with new algorithms and protocols,
+focusing on the broad scope of technologies, and not on their number.
+Ideally, our detailed classification should reflect actual condition in the
+field of distributed ledgers. The last, but not least aim of the project, is to
+collect all implemented algorithms described, or code them if they have not
+been programmed yet, in a complete library for free usage. This library will
+serve as a ``toolbox'' for a programmer, who wants to build his/her own
+cryptoledger, combining known algorithms and protocols from the developed
+library.
+% -----------------------------------------
+% 333 words
+% -----------------------------------------
+
+% Part of the aim of this project is to develop software that is compatible with
+% The past thirty years have seen increasingly rapid advances in the field of ...
+
+\section{Technical Aspects}\label{sec:ta}
+In order to proceed further, a definition of a distributed ledger, as well as
+the difference between distributed ledgers and blockchains must be given. A
+blockchain differs from a traditional spreadsheet or another ledger in that it
+is a decentralized, distributed ledger, stored in a distributed databases of
+network devices. People refer to it as ``distributed'' because no single entity
+manages a distributed ledger system on its own. The
+ledger is distributed across a network of computers, also known as ``nodes'', and
+each involved party has access to the ledger. This access allows all parties to
+receive real-time status updates on transactions which occur within the network
+of nodes.
+
+Each record of a transaction in a blockchain is represented by a timestamped
+``block''. Whenever a new block is generated on a blockchain, the system
+appends this block to the previous block using this blockchain’s unique
+algorithm. The visual result of the process is one of a ``chain'' of blocks.
+Hence the term ``blockchain''.
+
+Not all distributed ledgers are blockchains. There are types of distributed
+ledgers, which represent DAGs (Directed Acyclic Graphs), or some other
+company-related data structure, rather than the chain of blocks. But, the
+majority of distributed ledgers serve to the purpose of maintaining the
+viability of cryptocurrencies. It does not mean that every Distributed Ledgers
+Technology is used for creating cryptocurrencies. Some of them are used for
+different purposes, which are not covered in this paper.
+
+% -----------------------------------------
+% 239 words
+% -----------------------------------------
+
+\section{Problem Statement}
+% Спорное (ноблинкрасивое) утверждение. А ДОКАЖИ ЧТО РИЛ БЫЛA recognized?!
+The importance of creating a comprehensive classification of cryptographic
+algorithms and protocols for distributed ledgers has recently been recognized
+by the industry. However, the existing classification is expired, and there are
+no any comprehensive study on them in the online sources. It may cause
+difficult problems to overcome for a user, who wants to work with distributed
+ledgers (e.g.\ cryptocurrencies). A {target user}\label{user} in terms of this research is a
+user, who is concerned about security and cryptography, who's desire is to
+reveal and understand algorithms, being used in technology he/she is going to
+encounter with. If, when buying a cryptocurrency, an actor
+wants to know what cryptographic algorithms and protocols it uses, he/she may
+encounter difficulties finding that out and comparing it to other
+cryptocurrencies' algorithms and protocols. These are the consequences of
+modern tendency for websites to be consumer-oriented and provide only crisp and
+eye-appealing information. A major problem with their approach is that their
+primary goal is to ``sell'' it's content, and only after it goes the
+% можно ль так эмоционально "takes ages"?
+information delivery. Consequently, it takes ages for average user to find out
+underlying algorithms in a particular distributed ledger.
+
+Limitations of modern online ``blockchain creators'' is another problem for our
+target user. Platforms, which deliver (e.g.\ ``cryptocurrency creation''
+service), on average provide up to 3 algorithms and even less protocols. In
+fact, in certain cases they do not provide user the ability to choose any
+protocol. Taking that into account, our target user will not be able to choose
+algorithms and protocol for his own ledger from the whole variety. The
+limitations that those services put the user in are problematic.
+
+In summary, there is a need for a better understanding of today's
+cryptoledger's infrastructure and a structured approach in identifying and
+collecting the majority of cryptographic algorithms and protocols that are
+being used widely today. More specifically, the following research questions
+need to be addressed:
+\begin{itemize}
+    \item What are the typical cryptographic algorithms found in various distributed ledgers;
+    \item What are the typical cryptographic protocols found in various distributed ledgers;
+    \item How to classify these algorithms for easier understanding and representing;
+    \item What are the current industry practices as well as research advancements in each algorithm and protocol addressed;
+    \item How to unify the knowledge gathered about cryptographic algorithms and protocols into one neat place;
+    \item How to gather implemented algorithms and protocols into a programming
+          library, which will be easy to use for creating own cryptoledger
+          purpose?
+\end{itemize}
+
+\section{Objectives}
+An initial objective of the project was to identify, analyze and classify the
+broad scope of cryptographic algorithms and protocols in distributed ledgers.
+The main aspect of the objective is the broad scope of algorithms and protocols
+itself, not the quantity of distributed ledgers analyzed. It means that (e.g.\
+some cryptocurrencies) may not be reviewd if algorithms and protocols they use
+have already been classified. This goal also includes the implementation of the
+programming library with algorithms and protocols for creating own
+cryptoledger.
+Particularly, the study has the following sub-objectives:
+\begin{itemize}
+    \item To provide a comprehensive review of cryptographic algorithms found
+          in various distributed ledgers;
+    \item To provide a comprehensive review of cryptographic protocols found in
+          various distributed ledgers;
+    \item To develop a robust classification method for easier understanding
+          and representing;
+    \item To review current industry practices and researches in regards to
+          cryptographic algorithms and protocols in distributed ledgers;
+    \item To outline a unification method for working with all gathered
+          information on the topic;
+    \item To outline a programming method, language and methodology for
+          providing the library with algorithms and protocols reviewed.
+\end{itemize}
+The result of this study will be valuable to the industry practitioners (our
+target users\(^{\ref{user}}\)) as well as researchers. The data gathered will
+be concise, comprehensive, structured and easy to read. The program library is
+supposed to be a complete toolbox for creating own cryptoledger, choosing from
+a variety of gathered implemented algorithms and protocols.
 
 
+\section{Preliminary Literature Preview}
+Previous research [1] TODOcitation has established ``current ctyptoprotocol
+infrastructure''. By 2014, it was a complete and comprehensive diagram, showing
+all algorithms and protocols used in most popular distributed ledgers up to
+that time. The analysis is also well-structured, but generalisable. What is
+missing from the past study is a comprehensive and structured approach
+in determining algorithms and protocols for cryptoledgers analyzed. However,
+this study is the closest study to the topic discussed, and can be a great
+point for taking-off with this research. The whitepapers for such technologies
+as [bitcoin], [blockchain], [iota], [plasma], [ripple], [tkcoin] will surely be
+used thruought conducting the research. The value of these monographies
+consists of the following facts:
+\begin{itemize}
+    \item Whitepapers usually reveal algorithms and protocols used in a
+          particular distributed ledger;
+    \item Whitepapers usually point out the source code of algorithms and
+          protocols, or even entire ledger.
+\end{itemize}
+
+\section{Methodology}
+The primary research method for this study is literature review and benchmark
+analysis. Identification and classification of cryptographic algorithms and
+protocols in distributed ledgers is the first and the main step toward this
+paper's goal. This study will first review various types of distributed
+ledgers, such as cryptocurrencies, and investigate their characteristics. Then,
+based on understanding of the underlying structure of every ledger analyzed, a
+list of all known algorithms and protocols will be produced. In the third stage
+of this study, the new classification will be developed. Finally, the
+programming part will take place, where the implementations of gathered
+cryptographic algorithms and protocols will be assembled into a one complete
+library. This library will be a toolbox for users who want to build their own
+cryptoledger. This study will be conducted between November 2018 and March 2019.
 
 \end{document}
