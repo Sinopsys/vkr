@@ -1,0 +1,343 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  This Beamer template was created by Cameron Bracken.
+%%  Anyone can freely use or modify it for any purpose
+%%  without attribution.
+%%
+%%  Last Modified: January 9, 2009
+%%
+
+\documentclass[xcolor=x11names,compress]{beamer}
+
+%% General document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.fractals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{palatino}
+\usepackage{hyperref}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape}
+
+\setbeamertemplate{footline}{%
+    \begin{beamercolorbox}{section in head/foot}
+        \color{gray}\vskip2pt~ \insertsection\hfill\insertpagenumber{} %
+        of \insertpresentationendpage{} ~\vskip2pt
+    \end{beamercolorbox}
+}
+
+\setbeamercolor*{lower separation line head}{bg=DeepSkyBlue4}
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=red}
+\setbeamercolor*{example text}{fg=black}
+\setbeamercolor*{structure}{fg=black}
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10}
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10}
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\newcommand{\defcolor}{\black}
+\newcommand{\link}[2]{\color{blue}\href{#1}{#2}\color{\defcolor}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Introduction}
+\begin{frame}
+    \title{Cryptographic Algorithms and Protocols for Distributed Ledgers}
+    %\subtitle{SUBTITLE}
+    \author{
+        Student: Kirill I. Kupriyanov\\
+    Supervisor: Sergey M. Avdoshin\\
+    {\it Higher School of Economics, FCS SSE}\\
+}
+    \date{
+        \vspace{-1.5cm}
+    \begin{figure}[h!]
+        \includegraphics[scale=0.3]{./images/hse_logo_black}
+    \end{figure}
+    \today
+}
+    \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{figure}
+        \includegraphics[scale=0.3]{./images/trends}
+        \caption{\tiny  Figure 1. Interest of search quere ``blockchain'' over time, Google Trends; March 19, 2019}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{outline}
+    \tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Background}
+\subsection{Study area}
+\begin{frame}{study area}
+    \(
+        \begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item Distributed ledgers
+        \item Cryptography
+            % \begin{itemize}
+            %     \item Subitem 1
+            %     \item Subtem 2
+            % \end{itemize}
+       \item \small Programming
+    \end{itemize}
+    \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \includegraphics[scale=0.35]{./images/dlt}
+                \caption{\tiny Swanson, T., The Distributed Ledger Landscape, Jun 27, 2015}
+            \end{figure}
+        \end{column}
+    \)
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{study area}
+%    \begin{figure}
+%        \includegraphics[height=0.6\textwidth]{./images/possibilities}
+%        \caption{\tiny US Congressional Research Service, "Bitcoin: Questions, Answers, and Analysis of Legal Issues", January 28, 2015; PwC Analysis}
+%    \end{figure}
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{figure}
+        \includegraphics[scale=0.2]{./images/bytes}
+        \caption{\tiny  Figure 2. Transmitting bytes from one source to another, FOSS; Mar 19, 2019}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{study area}
+    \(
+        \begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item Distributed ledgers
+        \item Cryptography
+            % \begin{itemize}
+            %     \item Subitem 1
+            %     \item Subtem 2
+            % \end{itemize}
+       \item \small Programming
+    \end{itemize}
+    \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \includegraphics[scale=0.35]{./images/dlt}
+                \caption{\tiny Swanson, T., The Distributed Ledger Landscape, Jun 27, 2015}
+            \end{figure}
+        \end{column}
+    \)
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Definitions}
+\begin{frame}{definitions}
+    \begin{itemize}
+        \item Distributed Ledger
+        % \item Target user
+        \item Blockchain
+        \item Cryptocurrency
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{figure}
+        \includegraphics[scale=0.2]{./images/compare}
+        \caption{\tiny  Figure 3. Comparing blockchains to fruits, FOSS, Mar, 19, 2019}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{figure}
+        \includegraphics[scale=0.2]{./images/dl}
+        \caption{\tiny  Figure 4. Components of DLT, FOSS, Mar, 19, 2019}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Examples}
+    \(
+        \begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item Bitcoin
+        \item Litecoin
+        \item Namecoin
+        \item Etherium
+        \item Monero
+        \item Dash
+        \item Ripple
+        \item \dots
+    \end{itemize}
+    \end{column}
+        \begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item IOTA
+        \item Byteball
+        \item NANO
+        \item \dots
+    \end{itemize}
+        \end{column}
+    \)
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Problems} % Problem statement
+\subsection{Modern problems and questions}
+\begin{frame}{problems}
+\begin{itemize}
+        \item Outdated existing classification
+        \item Lack of technical information
+        \item Unsuitable blockchain creator programms
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{figure}
+        \includegraphics[scale=0.35]{./images/curr}
+        \caption{\tiny Figure 5. Swanson, T., The Great Wall of Numbers, 2014}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{problems}
+\begin{itemize}
+        \item Outdated existing classification
+        \item Lack of technical information
+        \item Unsuitable blockchain creator programms
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Methodology}
+\subsection{Theoretical and practical approaches}
+\begin{frame}{methodology}
+    \begin{itemize}
+        \item Literature review
+        \item Benchmark analysis, publishing to wiki
+        \item Free Python v. 3.6.5 library
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Expected results}
+\subsection{Concluding above}
+\begin{frame}{expected results}
+    \begin{itemize}
+        \item Structured body of knowledge is helpful
+        \item Research provides an in-depth view
+        \item Python library is used by target users
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape References}
+\subsection{Sources and literature used}
+\begin{frame}{sources and literature used}
+\begin{thebibliography}{1}
+\tiny
+\bibitem {swanson}
+Swanson, T., \emph{Great Chain of Numbers: A Guide to Smart Contracts,
+Smart Property and Trustless Asset Management.}, 2014, pp.44-47
+
+\bibitem {swansonslides}
+T. Swanson, "The Distributed Ledger Landscape", Slideshare.net, 2019. [Online].
+        Available:
+        https://www.slideshare.net/MrCollectrix/the-distributed-ledger-landscape.
+        [Accessed: 19- Mar- 2019]
+
+\bibitem {scientific}
+Xu, Xiwei \& Weber, Ingo \& Staples, Mark \& Zhu, Liming \& Bosch, Jan \& Bass,
+Len \& Pautasso, Cesare \& Rimba, Paul. \emph{A Taxonomy of Blockchain-Based Systems for
+Architecture Design.}, 2017, 10.1109/ICSA.2017.33, pp. 4-6
+
+\bibitem {nakamoto}
+Nakamoto, S. \emph{Bitcoin: A Peer-to-Peer Electronic Cash System}, 2014.
+[ebook] Available at: \url{https://bitcoin.org/bitcoin.pdf} [Accessed 9 Feb. 2019]
+
+\bibitem {google}
+"Google Trends", Google Trends, 2019. [Online]. Available:
+        https://trends.google.com/trends/. [Accessed: 19- Mar- 2019]
+
+\end{thebibliography}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Questions}
+% \subsection{Questions}
+\begin{frame}{questions}
+Any questions?
+\end{frame}
+
+
+\section{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{thank you for attention}
+    \underline{Contacts}\\
+
+    \vspace{0.5cm}
+    Kirill I. Kupriyanov\\
+    \emph{mephisto@openmail.cc}\\
+
+    \vspace{0.3cm}
+    Sergey M. Avdoshin\\
+    \emph{savdoshin@hse.ru}
+\end{frame}
+
+\end{document}
+
+
+% EOF
+
