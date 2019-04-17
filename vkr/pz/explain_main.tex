@@ -1,0 +1,190 @@
+\documentclass[
+%a4paper,12pt
+encoding=utf8
+]{twoeskd}
+
+% Packages required by doxygen
+\usepackage{fixltx2e}
+\usepackage{calc}
+\usepackage{doxygen}
+\usepackage[export]{adjustbox} % also loads graphicx
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{multirow}
+\PassOptionsToPackage{warn}{textcomp}
+\usepackage{textcomp}
+\usepackage[nointegrals]{wasysym}
+
+
+
+
+% NLS support packages
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+
+% Font selection
+\usepackage{courier}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\renewcommand{\familydefault}{\sfdefault}
+\newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+
+% Page & text layout
+\usepackage{geometry}
+\tolerance=750
+\hfuzz=15pt
+\hbadness=750
+\setlength{\emergencystretch}{15pt}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.2cm}
+\makeatletter
+\makeatother
+
+% Headers & footers
+% \usepackage{fancyhdr}
+% \renewcommand{\sectionmark}[1]{%
+%   \markright{\thesection\ #1}%
+% }
+% \usepackage[backend=biber
+%            % ,style=authoryear-icomp
+%             ]{biblatex}
+% \addbibresource{used_sources.bib}
+
+% Indices & bibliography
+% \usepackage{natbib}
+\usepackage[titles]{tocloft}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+\makeindex
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+% Custom commands
+\newcommand{\clearemptydoublepage}{%
+  \newpage{\pagestyle{empty}\cleardoublepage}%
+}
+\renewcommand{\DoxyLabelFont}{%
+  \fontseries{bc}\selectfont%
+}
+\newcommand\degr{$^\circ$}
+
+% Custom packages
+\usepackage{pdfpages}
+
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.2cm}
+
+\usepackage{listings}
+
+% debug to see the frame borders
+% from https://en.wikibooks.org/wiki/LaTeX/Page_Layout
+% \usepackage{showframe}
+
+% change style of titles in \section{}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\huge\bfseries\center}{\thetitle.}{1em}{}
+\titleformat{\subsection}[hang]{\Large\raggedright}{\thetitle.}{1em}{\underline}
+\titleformat{\subsubsection}[hang]{\large\raggedright}{\thetitle.}{1pt}{}
+
+% Packages for text layout in normal mode
+% \usepackage[parfill]{parskip} % автоматом делает пустые линии между параграфами, там где они есть в тексте
+% \usepackage{indentfirst} % indent even in first paragraph
+\usepackage{setspace}    % controls space between lines
+\setstretch{1} % space between lines
+\setlength\parindent{0.9cm} % size of indent for every paragraph
+\usepackage{csquotes}% превратить " " в красивые двойные кавычки
+\MakeOuterQuote{"}
+
+
+% this makes items spacing single-spaced in enumerations.
+\newenvironment{my_enumerate}{
+    \begin{enumerate}
+        \setlength{\itemsep}{1pt}
+        \setlength{\parskip}{0pt}
+        \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+\usepackage{pbox}
+
+% configure eskd
+\titleTop{
+    {\Large ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ \\
+        НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ \\
+        <<ВЫСШАЯ ШКОЛА ЭКОНОМИКИ>>} \\
+    \vspace*{0.2cm}
+    {Факультет компьютерных наук \\
+        Департамент программнoй инженерии \\
+    }
+}
+\titleDesignedBy{Студент группы БПИ 151 НИУ ВШЭ}{Куприянов К. И.}
+
+\titleAgreedBy{
+    \parbox[t]{7cm} {
+        \centerline{Профессор департамента}
+        \centerline{программной инженерии факультета}
+        \centerline{компьютерных наук, канд. техн. наук}
+}}{С.М. Авдошин}
+\titleApprovedBy{
+    \parbox[t]{7cm} {
+        \centerline{Академический руководитель}
+        \centerline{образовательной программы}
+        \centerline{<<Программная инженерия>>}
+        \centerline{профессор, канд. техн. наук}
+}}{В. В. Шилов}
+\titleName{Криптографические алгоритмы и протоколы для распределенных реестров}
+\workTypeId{\color{white} . }
+\titleSubname{\color{white} . }
+
+
+%===== C O N T E N T S =====
+\begin{document}
+
+% Titlepage & ToC
+
+\thispagestyle{empty}
+\pagenumbering{arabic}
+\paragraph*{\huge Реферат\\\\}
+\input{annotation}
+
+\newpage
+
+\paragraph*{\huge Abstract\\\\}
+\input{abstract}
+% \pagenumbering{arabic}
+\tableofcontents
+% \pagenumbering{arabic}
+
+% --- add my custom headers ---
+
+\newpage
+\section{Определения}
+\input{terminology}
+
+\newpage
+\section{Введение}
+\input{introduction}
+
+\newpage
+\section{Обзор технологий распределённых реестров}
+\input{dl_technologies}
+
+
+% Index
+% \newpage
+
+% \eskdListOfChanges
+
+% \phantomsection
+% \addcontentsline{toc}{section}{Алфавитный указатель}
+% \printindex
+
+\end{document}
