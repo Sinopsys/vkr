@@ -12,6 +12,11 @@ Ring signatures, Coinjoin, Coinshuffle, stealth addresses, MimbleWimble, etc.
 протоколы консенсуса, (общей сложностью более 20 штук), обеспечивающие защиту и
 надёжность транзакций в открытых блокчейнах.
 
+% TODO
+\subsection{Структура реестров}
+\subsubsection{Блокчейны}
+\subsubsection{Направленные ациклические графы (DAGs)}
+
 
 \subsection{Открытые и закрытые реестры}
 \subsubsection{Закрытые (private) реестры}
@@ -28,16 +33,11 @@ Ring signatures, Coinjoin, Coinshuffle, stealth addresses, MimbleWimble, etc.
 внутренних операций обмена и регистрирования.
 
 \subsubsection{Открытые (public) реестры}
-
+В открытых реестрах нет контроллирующей стороны, как это реализовано в закрытых реестрах. 
 
 \subsection{Разрешённые реестры}
 \subsubsection{Эксклюзивные (permissioned) реестры}
 \subsubsection{Инклюзивные (permissionless) реестры}
-
-
-\subsection{Структура реестров}
-\subsubsection{Блокчейны}
-\subsubsection{Направленные ациклические графы (DAGs)}
 
 
 \subsection{Алгоритмы}
@@ -58,6 +58,11 @@ Ring signatures, Coinjoin, Coinshuffle, stealth addresses, MimbleWimble, etc.
 
 \subsection{Протоколы консенсуса}
 \subsubsection{Proof of Work (PoW)}
+Алгоритм доказательства работы (Proof of Work) используется в открытых реестрах
+для создания новых блоков. Алгоритм хорошо проявляет себя для доказательства
+легитимности транзакции и предотвращения ``двойной траты''.  Выполняя это
+доказательство, майнеры вознаграждаются процентом, соответствующим
+вычислительной сложности всей сети.
 \subsubsection{Proof of Stake (PoS)}
 \subsubsection{Delegated Proof-of-Stake (DPoS)}
 \subsubsection{Proof-of-Authority (PoA)}
