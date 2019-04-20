@@ -25,6 +25,8 @@
 # *.eps
 # *.pdf
 
+!vkr/primers/
+
 ## Generated if empty string is given at "Please type another file name for output:"
 *.pdf
 *.latexmkrc
