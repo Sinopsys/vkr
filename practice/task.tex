@@ -1,0 +1,101 @@
+\documentclass[russian, a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{setspace}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage[left=20mm, top=15mm, right=15mm, bottom=15mm, nohead, footskip=10mm]{geometry} % настройки полей документа
+\usepackage{tocloft}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+%%% Работа с русским языком
+\usepackage{cmap}                   % поиск в PDF
+\usepackage[T2A]{fontenc}           % кодировка
+\usepackage[utf8]{inputenc}         % кодировка исходного текста
+
+%%% Повтор команды несколько раз через     \Repeat{n-times}{\command}
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+    \textbf{
+        Правительство Российской Федерации\\
+        Федеральное государственное автономное образовательное учреждение\\
+        высшего образования\\
+        «Национальный исследовательский университет\\
+    «Высшая школа экономики» }
+
+    \begin{center}  Факультет компьютерных наук\\
+        Департамент  программной инженерии\\
+        Образовательная программа 09.03.04 «Программная инженерия»
+    \end{center}
+
+    {\hfill \break}
+
+    {\Large\bfseries Задание на преддипломную практику}\\
+\end{center}
+\begin{flushleft}
+    {\bfseries Студент группы БПИ151: } \underline{Куприянов Кирилл Игоревич}\\
+    {\hfill \break}
+    {\bfseries Место прохождения практики: } Департамент Программной Инженерии, Факультет Компьютерных Наук, НИУ ВШЭ\\
+    {\bfseries Сроки прохождения: } 01.04.2019 --- 28.04.2019\\
+    {\bfseries Задание: } Криптографические алгоритмы и протоколы для распределенных реестров\\
+    {\bfseries Задачи:}
+    \begin{itemize}
+        \item Выявить популярные распределённые реестры и выделить криптографические алгоритмы в них
+        \item Изучить выявленные алгоритмы и способы их классификации
+        \item Замерить параметры алгоритмов
+        \item Классифицировать их согласно выявленным метрикам
+        \item Создать обновлённую на 2019 год классификацию алгоритмов и
+              протоколов в распределённых реестрах
+        \item Реализовать Python3.6.5 библиотеку, содержащую все изученные
+              алгоритмы и протоколы, позволяющую создавать распределённый реестр
+              в учебных целях
+        \item Опубликовать библиотеку в PyPi
+    \end{itemize}
+\end{flushleft}
+\Repeat{2}{\hfill \break}
+{\bfseries Критерий успешного прохождения: } Положительный отзыв руководителя практики от организации прохождения\\
+{\bfseries Форма отчётности: } Отчёт по практике\\
+
+{\hfill \break}
+Руководитель практики от организации
+\hspace{1cm}\underline{\hspace{3cm}}\hspace{1cm} С.М. Авдошин
+
+{\hfill \break}
+Задание принял на исполнение
+\hspace{2.7cm}\underline{\hspace{3cm}}\hspace{1cm} К.И. Куприянов
+
+{\hfill \break}
+Руководитель практики, \\к.т.н., профессор Департамента\\программной инженерии ФКН
+\hspace{2.8cm}\underline{\hspace{3cm}}\hspace{1cm} С.М. Авдошин
+% Должность \underline{\hspace{15cm}}\\
+% \newline
+% ФИО \underline{\hspace{8cm}}\hspace{0.3cm}
+% Оценка \underline{\hspace{6.2cm}}\\
+% \newline
+% Дата \underline{\hspace{4cm}}\hspace{4.35cm}
+% Подпись \underline{\hspace{6cm}}
+\Repeat{1}{\hfill \break}
+
+\begin{center}
+    Москва, 2019г.
+\end{center}
+
+\end{document}
+
+
+% EOF
