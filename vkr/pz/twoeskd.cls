@@ -9,7 +9,7 @@ format (V.Fyodorov@tltsu.ru)]
 \newif\ifeskd@title
 \eskd@titlefalse
 
-\newcommand{\eskdheight}{282}
+\newcommand{\eskdheight}{300}
 \newcommand{\eskdencoding}{utf8}
 \newcommand{\eskdyear}{\number\year}
 
@@ -52,7 +52,7 @@ format (V.Fyodorov@tltsu.ru)]
 \RequirePackage{pbox}
 
 \RequirePackage{pscyr}
-\renewcommand{\rmdefault}{far}
+\renewcommand{\rmdefault}{ftm}
 
 \RequirePackage[left=24mm,right=11mm,top=16mm,footskip=25pt,headsep=10pt]{geometry}
 
@@ -108,51 +108,19 @@ format (V.Fyodorov@tltsu.ru)]
 
 
 \newcommand{\make@eskd@myvert@style}{%
-  \newsavebox{\eskd@myvert@gost}
-  \newsavebox{\eskd@myvert@signature}
-  \savebox{\eskd@myvert@signature}{{\inputencoding{\eskdencoding}\eskd@typeid}}
-  \fancypagestyle{myverticaltable}{%
-  % clear the old headers. Otherwise they will overlap when switching styles
-  \fancyhf{}
-  \fancyhead[L]{%
-    \unitlength 1mm%
-    \begin{picture}(0,0)(-3,-15)
-      \put(0,-\eskdheight){\usebox{\eskd@vertical}}
-      \put(0,-\eskdheight){
-            \begin{rotate}{90}%
-            % \put(20,8){\makebox(0,0){\usebox{\eskd@myvert@signature}}}
-            \end{rotate}
-      }
-    \end{picture}
-    }
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}}
 }
 
 
-\newcommand{\eskdListOfChanges}{\newpage
-{\small\noindent
-\begin{tabular}{|c|*{7}{p{1.5cm}|}c|c|}
-  \multicolumn{10}{c}{\Large\bf Лист регистрации изменений}\\\hline
-& \multicolumn{4}{c|}{Номера листов
-(страниц)}&&&&&\\\cline{2-5}
-Изм.&из\-ме\-нен\-ных&за\-ме\-нен\-ных&но\-вых&%
-ан\-ну\-ли\-ро\-ван\-ных&
-Всего листов (страниц)
-в докум.&\textnumero\ докум.&Вхо\-дя\-щий \textnumero\
-сопроводительного докум. и дата&Подпись&Дата\\\hline
-\vbox{\vspace{\eskdheight mm}\vspace{-9cm}}&&&&&&&&&\\\hline
-\end{tabular}
-}
+\newcommand{\eskdListOfChanges}{
 }
 
 
 
 \newcommand{\make@eskd@title@style}{%
   \newsavebox{\eskd@agr}
-  \savebox{\eskd@agr}{\usefont{T2A}{far}{b}{n}\Large Согласовано}
+  \savebox{\eskd@agr}{\usefont{T2A}{ftm}{b}{n}\Large Согласовано}
   \newsavebox{\eskd@appr}
-  \savebox{\eskd@appr}{\usefont{T2A}{far}{b}{n}\Large Утверждаю}
+  \savebox{\eskd@appr}{\usefont{T2A}{ftm}{b}{n}\Large Утверждаю}
   \fancypagestyle{mytitle}{%
     \fancyhf{}
     \fancyhead[L]{%
@@ -232,7 +200,7 @@ format (V.Fyodorov@tltsu.ru)]
 \newcommand{\eskd@maketitle}{%
     \thispagestyle{mytitle}
     \set@eskd@bottom{55mm}
-    \usefont{T2A}{far}{m}{n}
+    \usefont{T2A}{ftm}{m}{n}
     \large
     \vspace*{1mm}
     \begin{center}

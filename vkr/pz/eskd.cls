@@ -73,7 +73,7 @@ format (V.Fyodorov@tltsu.ru)]
 \RequirePackage{fancyhdr}
 
 \RequirePackage{pscyr}
-\renewcommand{\rmdefault}{far}
+\renewcommand{\rmdefault}{ftm}
 
 \RequirePackage[left=24mm,right=11mm%
 ,top=10mm,nofoot,headsep=0pt]{geometry}
@@ -419,9 +419,9 @@ format (V.Fyodorov@tltsu.ru)]
   \newsavebox{\eskd@title@text}
   \savebox{\eskd@title@text}{\scriptsize\textar{Ф. 1288}}
   \newsavebox{\eskd@agr}
-  \savebox{\eskd@agr}{\usefont{T2A}{far}{b}{n}\Large Согласовано}
+  \savebox{\eskd@agr}{\usefont{T2A}{ftm}{b}{n}\Large Согласовано}
   \newsavebox{\eskd@appr}
-  \savebox{\eskd@appr}{\usefont{T2A}{far}{b}{n}\Large Утверждаю}
+  \savebox{\eskd@appr}{\usefont{T2A}{ftm}{b}{n}\Large Утверждаю}
   \fancypagestyle{title}{%
     \fancyhf{}
     \fancyhead[L]{%
@@ -553,7 +553,7 @@ format (V.Fyodorov@tltsu.ru)]
 \newcommand{\eskd@maketitle}{%
     \thispagestyle{title}
     \set@eskd@bottom{55mm}
-    \usefont{T2A}{far}{m}{n}
+    \usefont{T2A}{ftm}{m}{n}
     \large
     \vspace*{1mm}
     \begin{center}
