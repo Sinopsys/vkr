@@ -1,0 +1,166 @@
+\documentclass[encoding=utf8]{twoeskd}
+
+
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{makeidx}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% \usepackage[backend=biber
+%            % ,style=authoryear-icomp
+%             ]{biblatex}
+% \addbibresource{used_sources.bib}
+
+% NLS support packages
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{pscyr}
+
+% Font selection
+\usepackage{courier}
+\usepackage{amssymb}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.2cm}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+% debug to see the frame borders
+% from https://en.wikibooks.org/wiki/LaTeX/Page_Layout
+% \usepackage{showframe}
+
+% Indices & bibliography
+%\usepackage{natbib}
+\usepackage[titles]{tocloft}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+\makeindex
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% change style of titles in \section{}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\Large\bfseries\center}{\thetitle.}{1em}{}
+\titleformat{\subsection}[hang]{\large\normalfont\raggedright}{\thetitle.}{1em}{\underline}
+\titleformat{\subsubsection}[hang]{\normalsize\normalfont\raggedright}{\thetitle.}{1pt}{}
+
+% Packages for text layout in normal mode
+% \usepackage[parfill]{parskip} % автоматом делает пустые линии между параграфами, там где они есть в тексте
+% \usepackage{indentfirst} % indent even in first paragraph
+\usepackage{setspace}    % controls space between lines
+\setstretch{1} % space between lines
+\setlength\parindent{0.9cm} % size of indent for every paragraph
+\usepackage{csquotes}% превратить " " в красивые двойные кавычки
+\MakeOuterQuote{"}
+
+
+% this makes items spacing single-spaced in enumerations.
+\newenvironment{my_enumerate}{
+    \begin{enumerate}
+        \setlength{\itemsep}{1pt}
+        \setlength{\parskip}{0pt}
+        \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+\usepackage{pbox}
+
+% configure eskd
+\titleTop{
+    {\Large ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ \\
+        НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ \\
+        <<ВЫСШАЯ ШКОЛА ЭКОНОМИКИ>>} \\
+    \vspace*{0.2cm}
+    {Факультет компьютерных наук \\
+        Департамент программнoй инженерии \\
+    }
+}
+\titleDesignedBy{Студент группы БПИ 151 НИУ ВШЭ}{Куприянов К. И.}
+
+\titleAgreedBy{
+    \parbox[t]{7cm} {
+        \centerline{Профессор департамента}
+        \centerline{программной инженерии факультета}
+        \centerline{компьютерных наук, канд. техн. наук}
+}}{С.М. Авдошин}
+\titleApprovedBy{
+    \parbox[t]{7cm} {
+        \centerline{Академический руководитель}
+        \centerline{образовательной программы}
+        \centerline{<<Программная инженерия>>}
+        \centerline{профессор, канд. техн. наук}
+}}{В. В. Шилов}
+\titleName{Криптографические алгоритмы и протоколы для распределенных реестров}
+\workTypeId{RU.17701729.506300 T3 01-1}
+
+\titleSubname{Техническое задание}
+
+\begin{document}
+    \pagenumbering{arabic}
+
+    \section{Аннотация}
+    \input{annotation}
+
+    \newpage
+    \tableofcontents
+
+    % --- add my custom headers ---
+
+    \newpage
+    \section{Введение}
+    \input{introduction}
+
+    % \newpage
+    % \section{Основания для разработки}
+    % \input{reason_for_developing}
+
+    % \newpage
+    % \section{Назначение разработки}
+    % \input{purpose_of_development}
+
+    % \newpage
+    % \section{Требования к программе}
+    % \input{demands_from_program}
+
+    % \newpage
+    % \section{Требования к программной документации}
+    % \input{demands_from_documentation}
+
+    % \newpage
+    % \section{Технико-экономические показатели}
+    % \input{technical_economical_factors}
+
+    % \newpage
+    % \section{Стадии и этапы разработки}
+    % \input{stages_of_development}
+
+    % \newpage
+    % \section{Порядок контроля и приемки}
+    % \input{howto_control_and_submit}
+
+    % \newpage
+    % \section{Приложение 1. Терминология}
+    % \input{terminology}
+
+    \newpage
+    \section{Приложение 2. Список используемой литературы}
+    % \input{used_literature}
+
+    % Index
+    \newpage
+    \eskdListOfChanges
+
+\end{document}
+
+
+% EOF
