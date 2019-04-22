@@ -17,8 +17,10 @@ encoding=utf8
 \usepackage{textcomp}
 \usepackage[nointegrals]{wasysym}
 \usepackage{qtree}
-
-
+\usepackage{pgfplots}
+    \pgfplotsset{
+        compat=1.12,
+    }
 
 % NLS support packages
 \usepackage[T2A]{fontenc}
@@ -76,6 +78,9 @@ encoding=utf8
   \fontseries{bc}\selectfont%
 }
 \newcommand\degr{$^\circ$}
+
+%TODO DELETE !!!
+\renewcommand{\cite}{}
 
 % Custom packages
 \usepackage{pdfpages}
@@ -178,14 +183,20 @@ encoding=utf8
 \section{Глава 1. Обзор распределённых реестров}
 \input{dl_technologies}
 
+\newpage
+\section{Глава 2. Теоретический анализ алгоритмов и протоколов}
+% \input{dl_technologies}
 
-% Index
-% \newpage
+\newpage
+\section{Глава 3. Реализация программной библиотеки}
+% \input{dl_technologies}
 
-% \eskdListOfChanges
+\newpage
+\section{Заключение}
+% \input{dl_technologies}
 
-% \phantomsection
-% \addcontentsline{toc}{section}{Алфавитный указатель}
-% \printindex
+\newpage
+\section{Список использованных источников}
+% \input{dl_technologies}
 
 \end{document}
