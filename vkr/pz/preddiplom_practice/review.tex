@@ -1,0 +1,75 @@
+\documentclass[russian, a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{setspace}
+\usepackage[left=20mm, top=15mm, right=15mm, bottom=15mm, nohead, footskip=10mm]{geometry} % настройки полей документа
+\usepackage{tocloft}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+
+%%% Повтор команды несколько раз через     \Repeat{n-times}{\command}
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
+
+
+\begin{document}
+\thispagestyle{empty}
+{\Large
+\begin{center}
+    Отзыв руководителя о прохождении производственной практики\\
+    студентом группы БПИ 151 образовательной программы «Программная инженерия»\\
+    факультета компьютерных наук НИУ ВШЭ\\
+    Куприянова Кирилла Игоревича.
+\end{center}
+}
+
+\noindentВо время практики студент работал над ВКР на тему
+\underline{\hspace{7cm}}\\\\
+\underline{\hspace{\textwidth}}\\\\
+Период прохождения практики: с 1.04.2019 по 28.04.2019.
+    \Repeat{1}{\hfill \break}
+%
+    С отчетом по практике студента группы БПИ 151 Куприянова Кирилла Игоревича ознакомлен.
+    В программе практики перед студентом были поставлены задачи:
+    \begin{itemize}
+        \item Выявить популярные распределённые реестры и выделить криптографические алгоритмы в них
+        \item Изучить выявленные алгоритмы и способы их классификации
+        \item Замерить параметры алгоритмов
+        \item Классифицировать их согласно выявленным метрикам
+        \item Создать обновлённую на 2019 год классификацию алгоритмов и
+              протоколов в распределённых реестрах
+        \item Реализовать Python3.6.5 библиотеку, содержащую все изученные
+              алгоритмы и протоколы, позволяющую создавать распределённый реестр
+              в учебных целях
+        \item Опубликовать библиотеку в PyPi
+    \end{itemize}
+
+    \Repeat{8}{\hfill \break}
+
+Задание на практику выполнено в полном объеме. Студент Куприянов Кирилл Игоревич заслуживает оценки
+\underline{\hspace{0.7cm}} баллов из 10
+\newline
+\newline
+Должность \underline{\hspace{15cm}}\\
+\newline
+Подпись \underline{\hspace{6cm}}
+ФИО \underline{\hspace{8.3cm}}
+\newline
+\newline
+Дата \underline{\hspace{4cm}}
+\end{document}
+
+% EOF
