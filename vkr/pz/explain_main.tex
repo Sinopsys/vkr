@@ -49,10 +49,10 @@ encoding=utf8
 % \renewcommand{\sectionmark}[1]{%
 %   \markright{\thesection\ #1}%
 % }
-% \usepackage[backend=biber
-%          % ,style=gost-numeric
-%             ]{biblatex}
-% \addbibresource{../library.bib}
+\usepackage[backend=biber
+         % ,style=gost-numeric
+            ]{biblatex}
+\addbibresource{../library.bib}
 
 % Indices & bibliography
 % \usepackage{natbib}
@@ -80,7 +80,7 @@ encoding=utf8
 \newcommand\degr{$^\circ$}
 
 %TODO DELETE !!!
-\renewcommand{\cite}{}
+% \renewcommand{\cite}{}
 
 % Custom packages
 \usepackage{pdfpages}
@@ -197,6 +197,9 @@ encoding=utf8
 
 \newpage
 \section{Список использованных источников}
-% \input{used_literature}
+\input{used_literature}
+
+\newpage
+\section{Приложение 1. Техническое задание}
 
 \end{document}

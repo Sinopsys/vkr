@@ -23,9 +23,17 @@
 \usepackage{multicol}       % Несколько колонок
 \graphicspath{{images/}}    % Папка с картинками
 
+% графики всякие
+\usepackage{qtree}
+\usepackage{pgfplots}
+    \pgfplotsset{
+        compat=1.12,
+    }
+
 % \usepackage[backend=biber]{biblatex}
 % \addbibresource{used_sources.bib}
 \usepackage{caption}
+\captionsetup{labelformat=simple}
 \newlength{\mylen}
 
 
@@ -52,7 +60,7 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
 \begin{frame}
 \frametitle{Предметная область}
     \begin{multicols}{2}
-        1. Распределённые реестры -- база данных, которая распределена между
+        1. Распределённые реестры -- ``база данных'', которая распределена между
         несколькими сетевыми узлами или вычислительными устройствами. Каждый
         узел получает данные из других узлов и хранит полную копию реестра.
         Обновления узлов происходят независимо друг от друга
@@ -72,6 +80,7 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
 \begin{frame}
 \frametitle{Определения}
         \begin{itemize}
+\small
     \item Распределённый реестр (Distributed Ledger) --- Распределённая база
         данных между сетевыми узлами. Каждый из узлов может получать данные
                 других, при этом храня полную копию реестра.  Обновления этих
@@ -84,27 +93,62 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \item DAG --- Направленный ациклический граф. Это ориентированный граф с
         данными, использующий топологическую сортировку (от ранних узлов к
                 более поздним)
+    \item Протокол консенсуса --- стандарт, описывающий правила взаимодействия
+        и способы достижения согласия в группе. Голосование происходит в пользу
+                большинства, не учитывая интересы меньшинства, но с другой
+                стороны, это гарантирует достижение соглашения, которое несет
+                пользу всей группе
         \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Оглавление ВКР}
+    \begin{itemize}
+\small
+        \item Реферат {\bfseries \color{green!75!blue}(95\%)}
+        \item Введение {\bfseries \color{green!75!blue}(95\%)}
+        \item Глава 1. Обзор распределённых реестров {\bfseries \color{green!75!blue}(95\%)}
+        \item Глава 2. Теоретический анализ алгоритмов и протоколов {\bfseries \color{yellow!75!green}(15\%)}
+        \item Глава 3. Реализация программной библиотеки {\bfseries \color{red!75!blue}(0\%)}
+        \item Заключение {\bfseries \color{green!75!blue}(80\%)}
+        \item Приложение А. Техническое задание {\bfseries \color{green!75!blue}(95\%)}
+        \item Приложение Б. Руководство оператора  {\bfseries \color{red!75!blue}(0\%)}
+        \item Приложение В. Программа и методика испытаний {\bfseries \color{red!75!blue}(0\%)}
+        \item Приложение Г. Текст программы {\bfseries \color{red!75!blue}(0\%)}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{Обоснование актуальности работы}
+    \begin{itemize}
+        \item Популярность темы (TON, IPFS)
+        \item Устаревшая существующая классификация (на 2014 г.)
+        \item Люди опираются на бизнес аналитику
+        \item Отсутствие библиотеки с реализациями алгоритмов
+    \end{itemize}
+\end{frame}
 
+\begin{frame}[c]
+    \frametitle{Обоснование актуальности работы}
     \begin{multicols}{2}
     \begin{figure}
         \includegraphics[height=0.8\columnwidth]{blockchain.png}
-        \captionsetup{labelformat=empty}
         \caption{Блокчейн}
     \end{figure}
-
         \columnbreak
+    \begin{figure}
+        \includegraphics[height=0.8\columnwidth]{ton.png}
+        \caption{Криптовалюты}
+    \end{figure}
+\end{multicols}
+\end{frame}
 
-        \begin{figure}
-            \includegraphics[height=0.8\columnwidth]{ton.png}
-            \captionsetup{labelformat=empty}
-            \caption{Криптовалюты}
-        \end{figure}
-    \end{multicols}
+\begin{frame}[c]
+    \frametitle{Криптопротокол 2014г.}
+    \begin{figure}
+        \includegraphics[height=0.5\columnwidth]{current_protocols}
+        \caption{Криптопротокол по состоянию на 2014 год [15]}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -116,40 +160,51 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
         \item Выявить популярные распределённые реестры; выделить и изучить
               криптографические алгоритмы в них
         \item Изучить особенности реализации алгоритмов
-        \item Классифицировать их по:
-        \begin{itemize}
-            \item Назначениям
-            \item Энергозатратности
-            \item 
-        \end{itemize}
-        \item Сделать обзор лучших алгоритмов по приведённым параметрам
-        \item Написать библиотеку классов с содержанием криптографических алгоритмов
-\end{itemize}
+        \item Расположить их на диаграмме Эйлера-Венна для создания новой классификации
+        \item Написать библиотеку с содержанием криптографических алгоритмов
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Ожидаемые результаты}
-    \framesubtitle{Исследование и практика}
-    \begin{multicols}{2}
-        \textbf{Исследовательская часть}
+    \frametitle{Распределённые реестры}
+    \begin{figure}[h]
+        \captionsetup{labelformat=parens}
+        \Tree [.DL [.DAG ] [.Blockchain ] [.Hybrids\ \&\ Others ]]
+        \caption{Виды распределённых реестров}\label{graph_reester}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Алгоритмы и протоколы}
+    \begin{multicols}{3}
+        \textbf{Протоколы консенсусa}
         \begin{itemize}
-            \item Изучение и анализ криптографических алгоритмов в блокчейнах
-            \item Изучение и анализ криптографических алгоритмов в
-                распределённых реестрах, не являющимися блокчейнами
-            \item Сравнение российского MasterChain с зарубежными аналогами
+            \item PoW
+            \item PoS
+            \item DPoS
+            \item PoA
+            \item PoWeight
+            \item BFT
         \end{itemize}
-        \bigskip
         \columnbreak
-        \textbf{Практическая часть}
+        \textbf{Алгоритмы хэширования}
+         \begin{itemize}
+             \item SHA-256
+             \item SHA-512
+             \item Scrypt
+             \item KECCAK-256
+             \item Ethash
+             \item X11
+             \item X17
+             \item Lyra2rev2
+             \item myr-groestl
+             \item blake2s
+         \end{itemize}
+        \columnbreak
+        \textbf{Алгоритмы генерации случайных чисел}
         \begin{itemize}
-            \item Формирование библиотеки классов на Python 3.6, содержащую:
-                    \begin{itemize}
-                        \item Алгоритмы хэширования
-                        \item Алгоритмы цифровых подписей
-                    \end{itemize}
-            \item Библиотеку классов можно использовать для упрощённого
-                  создания распределённого реестра, например,
-                  блокчейна
+            \item DRBG
+            \item CPRNG
         \end{itemize}
     \end{multicols}
 \end{frame}
@@ -160,8 +215,51 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \textbf{Задача: } Расширение классификации
 
     \begin{figure}
-        \includegraphics[width=0.85\columnwidth]{current_protocols.png}
-        \captionsetup{labelformat=empty}
+        \includegraphics[width=0.75\columnwidth]{current_protocols.png}
+        \caption{Криптопротокол по состоянию на 2014 год [15]}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Существующая классификация криптопротоколов*}
+    \framesubtitle{На 2019 год}
+    \textbf{Задача: } Расширение классификации
+
+    \begin{figure}
+        \includegraphics[width=0.65\columnwidth]{myprotocol_w_title.png}
+        \caption{Криптопротокол по состоянию на 2019 год*}
+    \end{figure}
+    \begin{flushright}
+        \vspace{-0.5cm}
+        \tiny
+        *Альфа версия
+    \end{flushright}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Общее}
+    \framesubtitle{Сравнительный анализ}
+    \begin{figure}
+        \includegraphics[width=0.79\columnwidth]{sravn1.png}
+        \caption{Необходимые ресурсы для анализа}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Алгоритмы}
+    \framesubtitle{Сравнительный анализ}
+    \begin{figure}
+        \includegraphics[width=0.6\columnwidth]{sravn2.png}
+        \caption{Алгоритмы хэширования, протоколы консенсуса и др.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Алгоритмы, обеспечивающие приватность}
+    \framesubtitle{Сравнительный анализ}
+    \begin{figure}
+        \includegraphics[width=\columnwidth]{sravn3.png}
+        \caption{Алгоритмы, обеспечивающие приватность}
     \end{figure}
 \end{frame}
 
@@ -170,32 +268,56 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \begin{multicols}{2}
         \begin{itemize}
             \item Сравнительный анализ алгоритмов и протоколов
-            \item Язык Python 3.6
+            \item Язык Python 3.6.5
             \item {\LaTeX} (дистрибутив XeTeX) для презентаций и текста
+            \item YAML 1.2 как язык конфигурации библиотеки
+            \item Лицензии на использование и распространение кодов
         \end{itemize}
         \bigskip
         \columnbreak
         \begin{figure}
-            \includegraphics[width=\columnwidth]{gear.png}
-            \captionsetup{labelformat=empty}
+            \includegraphics[width=\columnwidth]{tech.png}
         \end{figure}
     \end{multicols}
 \end{frame}
 
 \begin{frame}
+    % \frametitle{}
+    \begin{multicols}{2}
+        \begin{center}
+            \textbf{Сделано}
+        \end{center}
+        \begin{itemize}
+            \item Исследовательская часть {\bfseries \color{yellow!60!green}(70\%)}
+            \item Программа {\bfseries \color{green!75!blue}(80\%)}
+            \item Документация {\bfseries \color{red!75!blue}(25\%)}
+        \end{itemize}
+        \bigskip
+        \columnbreak
+        \begin{center}
+            \textbf{\#TODO}
+        \end{center}
+        \begin{itemize}
+            \item Завершить классификацию
+            \item Доработать полный обзор рассмотренных алгоритмов
+            \item Проверить лицензии всех предполагаемых используемых кодов
+            \item Добавить в программу генерацию кода (Python Metaprogramming)
+        \end{itemize}
+    \end{multicols}
+\end{frame}
+
+\begin{frame}
     \frametitle{Список используемых источников}
-    % \nocite{*}
-    % \printbibliography{}
-    [1]: \textbf{Swanson, T.} (2014) \emph{Great Chain of Numbers a Guide to
-    Smart Contracts, Smart Property and Trustless Asset Management}
+    \begin{figure}
+        \includegraphics[width=\columnwidth]{lit1.png}
+    \end{figure}
+\end{frame}
 
-    [2]: \textbf{Satoshi N.} (2007) \emph{Bitcoin: A Peer-to-Peer Electronic Cash System}
-
-    [3]: \textbf{Aladin, D.} (2017) \emph{Blockchain Documentation}
-
-    [4]: \textbf{Cryptocurrency} (2018)
-    \emph{\small{https://en.wikipedia.org/wiki/Cryptocurrency}}
-
+\begin{frame}
+    \frametitle{Список используемых источников}
+    \begin{figure}
+        \includegraphics[width=\columnwidth]{lit2.png}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[c]
