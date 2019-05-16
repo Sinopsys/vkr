@@ -57,6 +57,8 @@ encoding=utf8
 % Indices & bibliography
 % \usepackage{natbib}
 \usepackage[titles]{tocloft}
+
+\usepackage{titletoc}
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{5}
 \makeindex
@@ -153,6 +155,12 @@ encoding=utf8
 %===== C O N T E N T S =====
 \begin{document}
 
+\titlecontents{section}[0em]
+{\vskip 0.5ex}%
+{}% numbered sections formattin
+{}% unnumbered sections formatting
+{}%
+
 % Titlepage & ToC
 
 \thispagestyle{empty}
@@ -183,13 +191,15 @@ encoding=utf8
 \section{Глава 1. Обзор распределённых реестров}
 \input{dl_technologies}
 
-% \newpage
-% \section{Глава 2. Теоретический анализ алгоритмов и протоколов}
-% % \input{dl_technologies}
+\newpage
+\section{Глава 2. Проектирование сервиса}
+\input{realisation_especiallities}
 
-% \newpage
-% \section{Глава 3. Реализация программной библиотеки}
-% % \input{dl_technologies}
+\newpage
+\section{Глава 3. Анализ полученных результатов}
+% \addcontentsline{toc}{section} {FINAlle}
+% \input{dl_technologies}
+
 
 \newpage
 \section{Заключение}
