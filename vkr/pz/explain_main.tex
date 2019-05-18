@@ -30,6 +30,7 @@ encoding=utf8
 \usepackage{courier}
 \usepackage{amssymb}
 \usepackage{sectsty}
+\usepackage{fancyvrb}
 \renewcommand{\familydefault}{\sfdefault}
 \newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
 
@@ -121,6 +122,14 @@ encoding=utf8
         \setlength{\parsep}{0pt}}{\end{enumerate}
 }
 \usepackage{pbox}
+
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize}{\theparagraph}{0.4em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 % configure eskd
 \titleTop{
