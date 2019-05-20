@@ -1,0 +1,278 @@
+Реализация блокчейна делится на 2 модуля: {\small wallet.py} и {\small
+miner.py}. Описание каждого из них представлено в данной секции.
+Данные модули генерируются компоновщиком, описанным в REF. Компоновщик
+сгенерировал данные модули таким образом, что они используют реализации
+алгоритмов, выбранных пользователем.
+
+\subsubsection{wallet.py}
+Модуль, позволяющий выполнить по запуску со стороны пользователя одну из трёх
+функциональностей:
+
+\begin{enumerate}
+    \item Создать новый кошелёк
+    \item Отправить средства
+    \item Валидировать транзакции
+\end{enumerate}
+
+
+Модуль должен использовать алгоритмы, выбранные пользователем на этапе
+генерации. Поэтому в начале, алгоритм импортирует их (листинг
+\ref{lst:import}). В противном случае, при невозможности их импортирования,
+модулем будут применены стандартные алгоритмы.  Подобными для хэширования
+является \textbf{SHA-256}, а для цифровой подписи \textbf{ECSDA}. 
+
+\begin{center}
+\begin{lstlisting}
+try:
+    import mydss
+    dss = mydss
+    if hasattr(dss, 'name') and hasattr(dss, 'bit'):
+        alg_name = dss.name
+        alg_bit = dss.bit
+        try:
+            from mydss import mydss
+            dss = mydss
+        except:
+            dss = mydss
+except:
+    import ecdsa
+    dss = ecdsa
+    alg_name = 'ecdsa'
+    alg_bit = '256'
+\end{lstlisting}\label{lst:import}
+    Листинг \ref{lst:import}: Импортирование выбранных пользователем опций (myhashing и mydss)
+\end{center}
+
+\paragraph{Создание нового кошелька}
+При создании нового кошелька, запрашивается имя пользователя, и генерируются
+публичный и приватный ключи. Далее, они записываются в файл
+\textbf{<name>.txt}.  Генерация ключей осуществляется в методе {\small
+generate\_ECDSA\_keys(ret=False)}.  При генерации по умолчанию, используется
+алгоритм \textbf{ECSDA}. При успешной попытке использования указанного
+пользователем алгоритма, используется он. Для компактности записи, длинный
+публичный ключ кодируется в base64 и в таком формате записыватеся в файл. В
+дальнейшем, он будет декодирован для корректной процедуры отправки/верификации.
+Описанная процедура представлена в листинге \ref{lst:creation}.
+
+\begin{center}
+\begin{lstlisting}
+def generate_ECDSA_keys(ret=False):
+    try:
+        sk = dss.SigningKey.generate(curve=dss.SECP256k1)   # this is your sign (private key)
+    except:
+        sk = dss.SigningKey().generate()   # this is your sign (private key)
+    private_key = sk.to_string().hex()  # convert your private key to hex
+    vk = sk.get_verifying_key()  # this is your verification key (public key)
+    try:
+        public_key = vk.to_string().hex()
+    except:
+        public_key = sk.to_string(pub=True)
+    if _timed:
+        t2 = time.time()
+        _write_time(alg_name, 'Key pair generation', alg_bit, t2-t1)
+    try:
+        public_key = base64.b64encode(bytes.fromhex(public_key.decode()))
+    except:
+        public_key = base64.b64encode(bytes.fromhex(public_key))
+    if ret:
+        return private_key, public_key.decode()
+    filename = input("Write the name of your new address: ") + ".txt"
+    with open(filename, "w") as f:
+        f.write("Private key: {0}\nWallet address / Public key: {1}".format(private_key, public_key.decode()))
+    print("Your new address and private key are now in the file {0}".format(filename))
+\end{lstlisting}\label{lst:creation}
+    Листинг \ref{lst:creation}: Генерация пары публичного и приватного ключей
+\end{center}
+
+
+
+\paragraph{Отправка средств}
+При отправки средств, используются стандартные подходы блокчейна. В модуле
+{\small miner.py} происходит (Листинг \ref{lst:send}) основная обработка и
+добавление самого блока к общей цепочке. В рассматриваемом {\small wallet.py},
+происходит лишь сбор всей необходимой для совершения транзакции в json payload
+и отправляется на URL в API модуля {\small miner.py}. Дальнейшая обработка
+отправленного запоса происходит в REF.
+
+\begin{center}
+\begin{lstlisting}
+def send_transaction(addr_from, private_key, addr_to, amount):
+    try:
+        len_prv = len(private_key)
+    except:
+        len_prv = len(str(private_key))
+    if len_prv == 64 or dss.name == 'gost':
+        signature, message = sign_ECDSA_msg(private_key)
+        url = f'http://localhost:{_port}/txion'
+        payload = {"from": addr_from,
+                   "to": addr_to,
+                   "amount": amount,
+                   "signature": signature.decode(),
+                   "message": message}
+        headers = {"Content-Type": "application/json"}
+        res = requests.post(url, json=payload, headers=headers)
+        print(res.text)
+    else:
+        print("Wrong address or key length! Verify and try again.")
+\end{lstlisting}\label{lst:send}
+    Листинг \ref{lst:send}: Отправка сформированного блока в {\small miner.py}
+\end{center}
+
+
+\paragraph{Валидация трназакций}
+Валидация транзакций в скрипте {\small wallet.py} ограничивается отправкой в
+{\small miner.py} запроса на проверку блоков (Листинг \ref{lst:valid}).
+
+\begin{center}
+\begin{lstlisting}
+    def check_transactions():
+        res = requests.get(f'http://localhost:{_port}/blocks')
+        print(res.text)
+\end{lstlisting}\label{lst:valid}
+    Листинг \ref{lst:valid}: Отправка запроса в {\small miner.py} на проверку
+    валидности транзакций
+\end{center}
+
+
+
+\subsubsection{miner.py}
+Данный модуль запускается и работает как фоновый процесс во время отправки и
+валидации сообщений первого. Он выполняет такие операции как mine block (майннг
+блока) --- процесс, в котором происходит вызов proof-of-work процедуры, после
+которой считается возможным добавить в цепочку блок.
+
+Со стороны http api для {\small wallet.py}, он выполняет:
+\begin{enumerate}
+    \item Принимает \textbf{POST} запрос на добавление нового блока в цепочку
+    \item Принимает \textbf{GET} запрос на проверку существующих блоков в
+          цепочке
+\end{enumerate}
+
+\paragraph{Создание нового блока}
+Создание нового блока происходит в несколько этапов.
+
+Информация о входящей транзакции регистрируется в очереди {\small
+NODE\_PENDING\_TRANSACTIONS} и выводится на стандартный вывод (stdout) ---
+Листинг \ref{lst:newblock}.  Процесс, запущенный в отдельном потоке исполнения
+ОС, целевой функцией которого является mine, получает изменения из очереди
+{\small NODE\_PENDING\_TRANSACTIONS} и запускает процесс майна нового блока ---
+Листинг \ref{mine}.
+
+\begin{center}
+\begin{lstlisting}
+    @app.route('/txion', methods=['GET', 'POST'])
+    def transaction():
+        if request.method == 'POST':
+            # On each new POST request, we extract the transaction data
+            new_txion = request.get_json()
+            # Then we add the transaction to our list
+            if validate_signature(new_txion['from'], new_txion['signature'], new_txion['message']):
+                NODE_PENDING_TRANSACTIONS.append(new_txion)
+                # Because the transaction was successfully
+                # submitted, we log it to our console
+                print("New transaction")
+                print("FROM: {0}".format(new_txion['from']))
+                print("TO: {0}".format(new_txion['to']))
+                print("AMOUNT: {0}\n".format(new_txion['amount']))
+                # Then we let the client know it worked out
+                return "Transaction submission successful\n"
+            else:
+                return "Transaction submission failed. Wrong signature\n"
+        # Send pending transactions to the mining process
+        elif request.method == 'GET' and request.args.get("update") == MINER_ADDRESS:
+            pending = json.dumps(NODE_PENDING_TRANSACTIONS)
+            # Empty transaction list
+            NODE_PENDING_TRANSACTIONS[:] = []
+            return pending
+\end{lstlisting}\label{lst:newblock}
+    Листинг \ref{lst:newblock}: URL '/txion' в {\small miner.py} для создания нового блока
+\end{center}
+
+
+\begin{center}
+\begin{lstlisting}
+def mine(a, blockchain, node_pending_transactions):
+    BLOCKCHAIN = blockchain
+    NODE_PENDING_TRANSACTIONS = node_pending_transactions
+    while True:
+        if _timed:
+            t1 = time.time()
+        last_block = BLOCKCHAIN[len(BLOCKCHAIN) - 1]
+        last_proof = last_block.data['proof-of-work']
+        proof = proof_of_work(last_proof, BLOCKCHAIN)
+        if not proof[0]:
+            BLOCKCHAIN = proof[1]
+            a.send(BLOCKCHAIN)
+            continue
+        else:
+            NODE_PENDING_TRANSACTIONS = requests.get(MINER_NODE_URL + "/txion?update=" + MINER_ADDRESS).content
+            NODE_PENDING_TRANSACTIONS = json.loads(NODE_PENDING_TRANSACTIONS)
+            NODE_PENDING_TRANSACTIONS.append({
+                "from": "network",
+                "to": MINER_ADDRESS,
+                "amount": 1})
+            new_block_data = {
+                "proof-of-work": proof[0],
+                "transactions": list(NODE_PENDING_TRANSACTIONS)
+            }
+            new_block_index = last_block.index + 1
+            new_block_timestamp = time.time()
+            last_block_hash = last_block.hash
+            NODE_PENDING_TRANSACTIONS = []
+            mined_block = Block(new_block_index, new_block_timestamp, new_block_data, last_block_hash)
+            BLOCKCHAIN.append(mined_block)
+            try:
+                print(json.dumps({
+                  "index": new_block_index,
+                  "timestamp": str(new_block_timestamp),
+                  "data": new_block_data,
+                  "hash": last_block_hash.decode()
+                }) + "\n")
+            except:
+                print(json.dumps({
+                  "index": new_block_index,
+                  "timestamp": str(new_block_timestamp),
+                  "data": new_block_data,
+                  "hash": last_block_hash
+                }) + "\n")
+            a.send(BLOCKCHAIN)
+            requests.get(MINER_NODE_URL + "/blocks?update=" + MINER_ADDRESS)
+            if _timed:
+                t2 = time.time()
+                _write_time(hash_name, 'Mining one block', hash_bit, t2-t1)
+\end{lstlisting}\label{lst:mine}
+    Листинг \ref{lst:mine}: Процесс майнинга новых блоков
+\end{center}
+
+
+\paragraph{Валидация подписи}
+Валидация электронной подписи происходит в методе {\small validate\_signature}.
+В нём вызываются методы алгоритма цифровой подписи. Алгоритм может быть либо
+выбранный пользователем на этапе генерации, или, если его не происходило,
+стандартным, то есть \textbf{ECSDA} с кривой  SECP256k1 --- Листинг
+\ref{lst:validate}.
+
+
+\begin{center}
+\begin{lstlisting}
+def validate_signature(public_key, signature, message):
+    if _timed:
+        t1 = time.time()
+    public_key = (base64.b64decode(public_key)).hex()
+    signature = base64.b64decode(signature)
+    try:
+        vk = dss.VerifyingKey().from_string(public_key)
+    except:
+        curve = dss.SECP256k1
+        vk = dss.VerifyingKey.from_string(bytes.fromhex(public_key), curve=curve)
+    try:
+        res = vk.verify(signature, message.encode())
+        if _timed:
+            t2 = time.time()
+            _write_time(alg_name, 'Verifying signature', alg_bit, t2-t1)
+        return res
+    except:
+        return False
+\end{lstlisting}\label{lst:validate}
+    Листинг \ref{lst:validate}: Процесс верификации электронной подписи
+\end{center}

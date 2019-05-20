@@ -1,0 +1,97 @@
+Автообновление настроено на отдельном сервере по расписанию. Конфигурация
+сервера представляет из себя VPS виртуальную машину, на которой установлена OS
+\emph{Ubuntu 16.04 LTS} с версией ядра \emph{4.4.0-148-generic}.
+
+Расписание автообновления сконфигурировано при помощи стандартной UNIX утилиты
+\textbf{cron}.  Конфигурация \textbf{crontab} представлена в листинге
+\ref{lst:cron}. Происходят там следующие процессы:
+
+\begin{itemize}
+    \item Каждый день в 20:00 запускается скрипт {\small updater.py}, который получает актуальные изменения алгоритмов в локальную копию на серверную ФС;
+    \item Каждый день в 21:00 запускается скрипт {\small pusher.py}, которые полученные изменения загружает в публичный репозиторий, делая обновлённые и актуальные данные доступными всем;
+    \item Логи обновления и загрузки пишутся в {\small updater.log} и {\small pusher.log} соответственно.
+\end{itemize}
+
+\begin{center}
+\begin{lstlisting}
+        00 20 * * * echo $(date) >> /home/coldmind/gsl/updater.log && cd /home/coldmind/gsl/src && ./updater.py >> /home/coldmind/gsl/updater.log 2>&1
+        00 21 * * * echo $(date) >> /home/coldmind/gsl/pusher.log && cd /home/coldmind/gsl && ./src/pusher.sh >> /home/coldmind/gsl/pusher.log 2>&1
+\end{lstlisting}\label{lst:cron}
+    Листинг \ref{lst:cron}: Конфигурация {\small crontab -l}
+\end{center}
+
+Код скрипта обновления {\small updater.py} представлен в листинге
+\ref{lst:updater}. Он использует реализованное key-value хранилище (REF) для
+получения ссылок, по которым возможно обновление загруженных алгоритмов, и для
+каждой ссылки и пути записи в ФС (тоже получает из key-value хранилища),
+запускает скрипт {\small pull\_single.sh} (Листинг \ref{lst:pull_single}).
+
+\paragraph{updater}
+
+\begin{center}
+\begin{lstlisting}
+#!/usr/bin/env python3.6
+
+import subprocess
+from technologies import _kv_, get
+toinstall = _kv_.toinstall
+update_links = _kv_.update_links
+
+for alg, src in update_links.items():
+    p = subprocess.popen(['bash', 'pull_single.sh', f'{get("toinstall", alg)}', f'{src}'], stdout=subprocess.pipe)
+    (result, error) = p.communicate()
+    print(result.decode())
+\end{lstlisting}\label{lst:updater}
+    листинг \ref{lst:updater}: Скрипт обновления всех алгоритмов со внешних источников
+\end{center}
+
+Скрипт {\small pull\_single.sh} (Листинг \ref{lst:pull_single}) представляет из
+себя поход по ссылке во внешний источник, выгрузку данных оттуда, и замещение
+новыми данными старые.
+
+\begin{center}
+\begin{lstlisting}
+#!/usr/bin/env bash
+
+if cd $1;
+then
+    cd ..
+    name1=$(echo $1 | rev | cut -d/ -f1 | rev)
+    name2=$(echo $2 | rev | cut -d/ -f1 | rev)
+    if [[ $name1 == $name2 ]]
+    then
+        rm -rf $name1
+        git clone $2
+        cd $name2
+        rm -rf .git*
+    fi
+fi
+\end{lstlisting}\label{lst:pull_single}
+    листинг \ref{lst:pull_single}: Скрипт обновления единичного алгоритма
+\end{center}
+
+
+\paragraph{pusher}
+
+Скрипт {\small pusher.py} используется для загрузки полученных изменений в сеть
+для общего доступа. Представлен в листинге \ref{lst:pusher}. При неизвестной
+ошибке в процессе обновления или некорректной работе обновлённых алгоритмов,
+подключенный к репозиторию сервис Continuous Integration не позволит вступить
+изменениям в силу, вследствие чего, пользователи будут защищены от нерабочего
+кода.
+
+\begin{center}
+\begin{lstlisting}
+#!/usr/bin/env bash
+
+curr_date=$(date +%d_%m_%Y)
+
+git add .
+git commit -m "Update algorithms: $curr_date."
+git push
+
+
+# EOF
+\end{lstlisting}\label{lst:pusher}
+    листинг \ref{lst:pusher}: Скрипт для загрузки обновлённых данных
+\end{center}
