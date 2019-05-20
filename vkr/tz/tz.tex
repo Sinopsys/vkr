@@ -18,10 +18,10 @@
     urlcolor=black
 }
 
-% \usepackage[backend=biber
-%            % ,style=authoryear-icomp
-%             ]{biblatex}
-% \addbibresource{used_sources.bib}
+\usepackage[backend=biber
+           ,style=gost-numeric
+            ]{biblatex}
+\addbibresource{../library.bib}
 
 % NLS support packages
 \usepackage[T2A]{fontenc}
@@ -48,13 +48,21 @@
 \setcounter{secnumdepth}{5}
 \makeindex
 
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\usepackage{pdfpages}
+
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.2cm}
+
+% debug to see the frame borders
+% from https://en.wikibooks.org/wiki/LaTeX/Page_Layout
+% \usepackage{showframe}
 
 % change style of titles in \section{}
 \usepackage{titlesec}
-\titleformat{\section}[hang]{\Large\bfseries\center}{\thetitle.}{1em}{}
-\titleformat{\subsection}[hang]{\large\normalfont\raggedright}{\thetitle.}{1em}{\underline}
-\titleformat{\subsubsection}[hang]{\normalsize\normalfont\raggedright}{\thetitle.}{1pt}{}
+\titleformat{\section}[hang]{\huge\bfseries\center}{\thetitle.}{1em}{}
+\titleformat{\subsection}[hang]{\Large\raggedright}{\thetitle.}{1em}{\underline}
+\titleformat{\subsubsection}[hang]{\large\raggedright}{\thetitle.}{1pt}{}
 
 % Packages for text layout in normal mode
 % \usepackage[parfill]{parskip} % автоматом делает пустые линии между параграфами, там где они есть в тексте
@@ -65,6 +73,29 @@
 \usepackage{csquotes}% превратить " " в красивые двойные кавычки
 \MakeOuterQuote{"}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 % this makes items spacing single-spaced in enumerations.
 \newenvironment{my_enumerate}{
@@ -74,6 +105,14 @@
         \setlength{\parsep}{0pt}}{\end{enumerate}
 }
 \usepackage{pbox}
+
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize}{\theparagraph}{0.4em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 % configure eskd
 \titleTop{
@@ -101,7 +140,7 @@
         \centerline{профессор, канд. техн. наук}
 }}{В. В. Шилов}
 \titleName{Криптографические алгоритмы и протоколы для распределенных реестров}
-\workTypeId{RU.17701729.506300 T3 01-1}
+\workTypeId{RU.17701729.04.01-01 T3 01-1}
 
 \titleSubname{Техническое задание}
 
@@ -154,7 +193,7 @@
 
     \newpage
     \section{Приложение 2. Список используемой литературы}
-    % \input{used_literature}
+    \input{used_literature}
 
     % Index
     \newpage
