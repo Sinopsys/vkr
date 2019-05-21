@@ -1,0 +1,130 @@
+\documentclass[
+%a4paper,12pt
+encoding=utf8
+]{./twoeskd}
+
+% \usepackage{eskdappsheet}
+
+% Packages required by doxygen
+\usepackage[export]{adjustbox} % also loads graphicx
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{makeidx}
+
+% NLS support packages
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{pscyr}
+
+% Font selection
+\usepackage{courier}
+\usepackage{amssymb}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.2cm}
+
+% debug to see the frame borders
+% from https://en.wikibooks.org/wiki/LaTeX/Page_Layout
+% \usepackage{showframe}
+
+% Indices & bibliography
+\usepackage[backend=biber
+           % ,style=authoryear-icomp
+            ]{biblatex}
+\addbibresource{used_sources.bib}
+\usepackage[titles]{tocloft}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+
+% change style of titles in \section{}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\huge\bfseries\center}{\thetitle.}{1em}{}
+\titleformat{\subsection}[hang]{\Large\normalfont\raggedright}{\thetitle.}{1em}{\underline}
+\titleformat{\subsubsection}[hang]{\large\normalfont\raggedright}{\thetitle.}{1pt}{}
+
+% Packages for text layout in normal mode
+% \usepackage[parfill]{parskip} % автоматом делает пустые линии между параграфами, там где они есть в тексте
+% \usepackage{indentfirst} % indent even in first paragraph
+\usepackage{setspace}	 % controls space between lines
+\setstretch{1} % space between lines
+\setlength\parindent{0.9cm} % size of indent for every paragraph
+\usepackage{csquotes}% превратить " " в красивые двойные кавычки
+\MakeOuterQuote{"}
+
+
+% this makes items spacing single-spaced in enumerations.
+\newenvironment{my_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+% Custom commands
+% configure eskd
+\titleTop{
+	{\Large ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ \\
+		НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ \\
+		«ВЫСШАЯ ШКОЛА ЭКОНОМИКИ» } \\
+	\vspace*{0.2cm}
+	{Факультет компьютерных наук \\
+		Департамент программнoй инженерии \\
+	}
+}
+\titleDesignedBy{Студент группы БПИ 151 НИУ-ВШЭ}{Куприянов К. И.}
+
+\titleAgreedBy{
+	\parbox[t]{7cm} {
+		\centerline{Академический руководитель ОП}
+		\centerline{Системная и программная инженерия}
+		\centerline{профессор ДПИ}
+}}{Д.В. Александров}
+\titleApprovedBy{
+	\parbox[t]{7cm} {
+		\centerline{Академический руководитель}
+		\centerline{образовательной программы}
+		\centerline{«Программная Инженерия»}
+		\centerline{профессор, канд. техн. наук}
+}}{В. В. Шилов}
+\titleName{Клиент-Серверное Android-Приложение для Управления Скидками в Розничных Сетях}
+\workTypeId{RU.17701729.506900 12 01-1}
+
+\titleSubname{Текст программы}
+
+
+%===== C O N T E N T S =====
+
+
+\begin{document}
+
+% Titlepage & ToC
+\pagenumbering{roman}
+
+% some water filling text, that is pointless but adds text
+% \input{annotation}
+
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+
+% --- add my custom headers ---
+\newpage
+\section{Текст программы}
+\input{the_code}
+
+\newpage
+\section{Приложение 1. Список используемой литературы}
+\input{used_literature}
+
+% Index
+\newpage
+\eskdListOfChanges
+
+% \phantomsection
+% \addcontentsline{toc}{section}{Алфавитный указатель}
+% \printindex
+
+\end{document}
