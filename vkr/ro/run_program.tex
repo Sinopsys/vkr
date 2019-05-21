@@ -1,96 +1,143 @@
 \subsection{Загрузка файлов}
-В данном разделе будет показано, как устанавливать программу и пользоваться ей. Для описания каждого проделанного шага будут включены описание действий и скриншоты приложения.
+В данном разделе будет показано, как устанавливать программу и пользоваться ей.
+Для описания каждого проделанного шага будут включены описание действий и
+скриншоты приложения.
+
 \subsubsection{Установка программы}
-Дистрибутив данной программы можно будет получить по ссылке, считав ее с
-прилагаемого qr-кода(рис.~\ref{ref})
+Дистрибутив данной программы можно будет получить с прилагаемого CD диска, либо
+по ссылке, считав ее с прилагаемого qr-кода(рис.~\ref{ref}).
 
 \begin{figure}[h!]
     \centering
-    % \includegraphics[width=0.7\textwidth]{./screenshots/3/qr.png}
+    \includegraphics[width=0.5\textwidth]{./screenshots/qr.png}
     \caption{ссылка на программу}
     \label{ref}
 \end{figure}
 
 Чтобы начать испытания выполнения требований к функциональным характеристикам,
-необходимо запустить установщик программы путем нажатия на его иконку. После
-запуска установщика появится приветственное окно мастера установки (рис.~\ref{install1},~\ref{install2},~\ref{install3}).
+необходимо запустить установщик программы путем выполнения инструкций
+(Рис.~\ref{install}), написанных в репозитории данного приложения (ссылка
+доступна по qr коду~\ref{ref}).
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/install_1.jpg}
-    \caption{\small{начало установки}}
-    \label{install1}
+    \includegraphics[width=\textwidth]{./screenshots/installation.png}
+    \caption{Инструкция по установке программы}\label{install}
+\end{figure}
+
+\subsubsection{Использование приложения компоновщик}
+Далее приложение необходимо запустить. Запускается компоновщик при помощи команды
+
+\begin{center}
+\begin{verbatim}
+                                  gsl --init --name myledger --path ~/tmp/gsl
+\end{verbatim}
+\end{center}
+
+где \emph{myledger} --- название будущего блокчейна, а \emph{~/tmp/gsl} ---
+путь до создания директории с блокчейном.
+
+Приложение отобразит приветственное сообщение с вариантами выбора алгоритмов
+(пометка 1 на Рис.~\ref{algs_choose}).  Варианты подсвечены в зависимости от
+степени поддержки алгоритмов программой (пометка 3 на Рис.~\ref{algs_choose}).
+Так же есть возможность выбора значения по умолчанию, не вводя ничего (пометка
+2 на Рис.~\ref{algs_choose})
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./screenshots/algs_choose}
+    \caption{Начало работы компоновщика}\label{algs_choose}
+\end{figure}
+
+После выбора алгоритмов хэширования и цифровой подписи, пользователю
+показываются свойства/структура/другие алгоритмы распределённых реестров (Рис.~\ref{additional_opts}), по
+которым можно получить справочную информацию (Рис.~\ref{spravka})
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/additional_opts}
+    \caption{Вывод опций по которым будет дана справочная информация}\label{additional_opts}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/spravka}
+    \caption{Справочная информация в конце выполнения компоновщика}\label{spravka}
+\end{figure}
+
+После завершения работы программы по указанной директории располагаются
+модули {\small wallet.py} и {\small miner.py} вместе с выбранными алгоритмами
+хэщирования и электронной подписи (Рис.~\ref{lldir}).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/lldir}
+    \caption{директория со сгенерированным кодом}\label{lldir}
+\end{figure}
+
+\subsubsection{Использование приложения реализация блокчейна}
+Проведём сценарий использования приложения реализация блокчейна. Сгенерируем 2
+кошелька, отправим с одного адреса на другой 13 единиц условной валюты
+
+Запустить код кошелька необходимо при помощи команды {\small python3 wallet.py}
+и затем выбрать первую опцию. При выборе первой опции должен отображаться
+диалог с требованием ввести имя, и дальнейшей генерацией адреса кошелька (пары
+публичный-приватный ключи) (Рис.~\ref{gen_kirill_cut}-~-\ref{gen_love})
+
+\begin{figure}[h!]
+    \centering
+    \minipage{0.49\textwidth}
+    \includegraphics[width=\textwidth]{./screenshots/gen_kirill_cut}
+    \caption{Генерация адреса {\small kirill}}\label{gen_kirill_cut}
     \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/install_2.jpg}
-    \caption{\small{процесс установки}}
-    \label{install2}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/install_3.jpg}
-    \caption{\small{приложение установлено}}
-    \label{install3}
+    \minipage{0.49\textwidth}
+    \includegraphics[width=\textwidth]{./screenshots/gen_love}
+    \caption{Генерация адреса {\small julia}}\label{gen_love}
     \endminipage{}
 \end{figure}
 
+Таким образом, были сгенерированы 2 адреса кошельков (Рис.~\ref{cat_hash})
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/cat_hash}
+    \caption{Адреса кошельков}\label{cat_hash}
+\end{figure}
+Теперь можно приступать к отправке условных средств с одного адреса на адрес
+другой. В другом окне запустить майнер командой {\small python3 miner.py}, и
+оставить его исполнение.
 
-\subsubsection{Использование приложения}
-Затем приложение необходимо открыть. Оператора будет приветствовать экран входа
-в аккаунт. Есть возможность использовать приложение без входа и регистрации, но
-при таком условии, оператору будут доступен ограниченный функционал, а именно
-только просмотр акций. Регистрация даёт возможность работы со списками покупок.
-(рис.~\ref{login},~\ref{register}).
+При запуске майнера, должен вестись лог о проведённых транзакциях и их
+валидациях (Рис.~\ref{log1}~-~Рис.~\ref{log2}).
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.45\textwidth}
-    % \includegraphics[height=0.37\textheight]{./screenshots/3/login.jpg}
-    \caption{\small{вход в аккаунт}}
-    \label{login}
-    \endminipage\hfill
-    \minipage{0.45\textwidth}
-    % \includegraphics[height=0.37\textheight]{./screenshots/3/register.jpg}
-    \caption{\small{регистрация аккаунта}}
-    \label{register}
-    \endminipage{}
+    \includegraphics[width=\textwidth]{./screenshots/miner_run}
+    \caption{Лог работы майрена}\label{log1}
 \end{figure}
 
-Войдя в аккаунт или выбрав режим без регистрации, пользователь попадает на
-главный экран приложения (рис.~\ref{home}).
+В кошельке для отправке условных средств с одного счёта на другой, необходимо
+выбрать вторую опцию и ввести публичный и приватный адреса отправителя, а так
+же публичный ключ получателя (Рис.~\ref{sending}). Подтвердить намерение
+отправить и осуществить тем самым отправку.
 
 \begin{figure}[h!]
     \centering
-    % \includegraphics[height=0.35\textheight]{./screenshots/3/home.jpg}
-    \caption{\small{просмотр всех акций}}
-    \label{home}
+    \includegraphics[width=\textwidth]{./screenshots/sending_sha}
+    \caption{Процесс отправки средств}\label{sending}
 \end{figure}
-
-Далее, из любой активности оператор может вызвать раздел help (рис. \ref{help})
-в меню приложения, где указана инструкция пользования данным продуктом. Также,
-оператор имеет возможность просмотреть раздел about (рис. \ref{about}), где
-написана общая информация о приложении и о разработчиках, и по долгому зажатию
-на элементы button (кнопки), узнать её функционал (\ref{long_click}), что поможет ему лучше
-разбираться в работе приложения.
-
 \begin{figure}[h!]
     \centering
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.35\textheight]{./screenshots/3/about.jpg}
-    \caption{\small{просмотр раздела ``о приложении''}}
-    \label{about}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.35\textheight]{./screenshots/3/help.jpg}
-    \caption{\small{просмотр подсказки пользования приложением}}
-    \label{help}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.35\textheight]{./screenshots/3/hint.jpg}
-    \caption{\small{просмотр всплывающего описания элементов button (кнопок)}}
-    \label{long_click}
-    \endminipage{}
+    \includegraphics[width=\textwidth]{./screenshots/log_send}
+    \caption{Лог регистрации новой транзакции}\label{log2}
 \end{figure}
 
+Теперь, можно проверить весь блокчейн на предмет совершённой транзакции. При
+выборе третей опции в кошельке, должен отобразиться полная цепочка
+транзакций (блокчейн) (Рис.~\ref{full_chain}).
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/full_chain}
+    \caption{Отображение полной цепочки транзакций}\label{full_chain}
+\end{figure}
+
+На этом работу программы можно считать завершённой.
 \newpage
-

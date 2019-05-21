@@ -2,204 +2,175 @@
 программной документации заданным требованиям.
 
 \subsection{Проверка требований к документации}
-Проверяется наличие всех документов перечисленных в пyнкте 4.1 данного
+Проверяется наличие всех документов перечисленных в пyнкте~\ref{docs} данного
 документа и их соответствие ГОСТ.
 
 \subsection{Проверка требований к интерфейсу}
-Интерфейс должен соответствовать схеме, указанной в настоящем Техническом
-Задании и быть совместим а ОС Андроид. Использованные графические элементы
-должны быть стандартными элементами графического семейства системы Андроид.
-Используемая цветовая палитра должна соответствовать рекомендациям сайта,
-указанного в настоящем Техническом Задании. Рис.~\ref{interface}
+Требования к интерфейсу не предъявлялись.
 
-\begin{figure}[h!]
-    \centering
-    % \includegraphics[height=0.48\textheight]{./screenshots/3/shoplist.jpg}
-    \caption{проверка требований к интерфейсу}
-    \label{interface}
-\end{figure}
-
-\newpage
 \subsection{Проверка требований к функциональным характеристикам}
 
-\subsubsection{Андроид приложение}
+\subsubsection{Проверка требований к компоновщику}
 Проверка реализованного функционала продемонстрирована на скриншотах ниже.
 
-Должна быть реализованa возможность просмотра списка доступных магазинов с
-акционными товарами (выпадающий список на Рис.~\ref{items}), представление текущих акций для конкретного магазина в
-виде общего списка и по категориям. (Рис.~\ref{categs_1},~\ref{categs_2}) Должна быть реализована постепенная
-загрузкa товаров магазинов (по страницам) для экономии трафика и меньшей
-нагрузкой на мобильное устройство.
-
-Загрузка акций не должна превышать лимит, установленный требованиями и проверена в
-пункте 6.4 настоящей Программы и Методики Испытаний.
+По запуску приложения с параметром {\small init}, на консоль должно выводится
+приветственное сообщение с краткой информацией по дальнейшим действиям. (пункт 1 на Рис.~\ref{algs_choose})
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/home.jpg}
-    \caption{\small{просмотр всех акций}}
-    \label{items}
+    \includegraphics[width=0.85\textwidth]{./screenshots/algs_choose}
+    \caption{Начало работы компоновщика}\label{algs_choose}
+\end{figure}
+
+Алгоритмы должны отображаться пронумерованно; по категориям (Рис.~\ref{algs_choose})
+
+Вывод алгоритмов должен быть в цвете, обозночающим степень поддержки программой
+алгоритма (пункт 3 Рис.~\ref{algs_choose})
+
+Должен поддерживаться выбор алгоритмов ``по умолчанию'', и при отсутствии ввода
+определённого номера алгоритма, выбираться указанный в качестве алгоритма ``по
+умолчанию'' (пункт 2 Рис.~\ref{algs_choose})
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/additional_opts}
+    \caption{Вывод опций по которым будет дана справочная информация}\label{additional_opts}
+\end{figure}
+
+После выбора алгоритмов хэширования и цифровой подписи, пользователю должны
+показываться свойства/структура/другие алгоритмы распределённых реестров, по
+которым можно получить справочную информацию (Рис.~\ref{additional_opts})
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/confirmation}
+    \caption{Подтверждение выбранных опций}\label{confirmation}
+\end{figure}
+
+Должен выводиться итоговый выбор пользователя с вопросом о намерении принять
+изменения и продолжить дальнейшее выполнение программы
+(Рис.~\ref{confirmation})
+
+\begin{figure}[h!]
+    \centering
+    \minipage{0.49\textwidth}
+    \includegraphics[width=\textwidth]{./screenshots/installing1}
+    \caption{Процесс установки выбранных алгоритмов}
+    \label{inst1}
     \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/categories.jpg}
-    \caption{\small{выбор категории}}
-    \label{categs_1}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/categ_filter.jpg}
-    \caption{\small{просмотр по категориям. На скриншоте --- категория ``Кофе, чай, сахар''}}
-    \label{categs_2}
+    \minipage{0.49\textwidth}
+    \includegraphics[width=\textwidth]{./screenshots/installing2}
+    \caption{Завершение установки выбранных алгоритмов}
+    \label{inst2}
     \endminipage{}
 \end{figure}
 
-Должна быть реализована возможность создания списков покупок c разными названиями,
-и возможность удаления списка покупок. (Рис.~\ref{sl_all} -~\ref{delete_sl})
+При подтверждении выбора набора алгоритмов пути до исходных кодов алгоритмов
+должны быть получены из хранилища, и по ним должна произойти установка в
+систему (Рис.~\ref{inst1}~-~\ref{inst2}).
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/all_shoplists.jpg}
-    \caption{\small{просмотр всех списков покупок}}
-    \label{sl_all}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/new_shoplist.jpg}
-    \caption{\small{создание нового списка покупок}}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/delete_shoplist.jpg}
-    \caption{\small{удаление списка покупок}}
-    \label{delete_sl}
-    \endminipage{}
+    \includegraphics[width=\textwidth]{./screenshots/spravka}
+    \caption{Справочная информация в конце выполнения компоновщика}\label{spravka}
 \end{figure}
 
-Добавление товара в список покупок должна вызываться нажатием кнопки '+', а
-удалениe товара из списка покупок путём нажатия кнопки '-'.
-
-Добавление в список
-покупок пользовательских товаров, которых нет в магазине вызывается нажатием
-'+' из списка покупок, а просмотр подобранных программой товаров согласно
-запросу пользователя должен вызываться нажатием на пользовательский товар.
-Рис~\ref{custom}
-
-При долгом зажатии подобранных товаров должно происходить добавление
-подобранных товаров в список покупок.
-
-При переходе на фрагмент 2 (Списки покупок), на экране устройства должно
-показываться предварительное отображение элементов каждого списка покупок до их
-открытия.
+По завершении выполнения программа должна выводить справочную информацию по
+выбранным свойствам распределённого реестра (Рис.~\ref{spravka}).
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/shoplist.jpg}
-    \caption{\small{просмотр конкретного списка покупок}}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/shoplist_custom_fold.jpg}
-    \caption{\small{просмотр подобранных программой товаров в соответствии с запросом пользователя}}
-    \label{custom}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/full_item_preview.jpg}
-    \caption{\small{просмотр всей информации о товаре}}
-    \endminipage{}
+    \includegraphics[width=\textwidth]{./screenshots/lldir}
+    \caption{Директория со сгенерированным кодом}\label{lldir}
 \end{figure}
 
-На экране с активностью RegisterActivity (Рис.~\ref{register}) должна быть возможность регистрации
-через мобильное приложение, а на экране LoginActivity (Рис.~\ref{register}) --- вход в аккаунт через
-мобильное приложение, возможность смены аккаунта должна осуществляться путём 1) выхода из аккаунта 2) входа в другой аккаунт.
+После завершения работы программы по указанной директории должны располагаться
+модули {\small wallet.py} и {\small miner.py} вместе с выбранными алгоритмами
+хэщирования и электронной подписи (Рис.~\ref{lldir}).
+
+Должно производиться автообновление алгоритмов каждый день в 21:00. Каждый день
+в репозитории проекта должен быть коммит в 21:00 с обновлениями алгоритмов,
+если таковые имеются.
+
+
+\subsubsection{Проверка требований к реализации блокчейна}
+Проверка реализованного функционала продемонстрирована на скриншотах ниже.
+Модуль {\small wallet.py} будем называть \textbf{кошелёк}, а {\small miner.py}
+--- \textbf{майнер}.
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.45\textwidth}
-    % \includegraphics[height=0.42\textheight]{./screenshots/3/login.jpg}
-    \caption{\small{вход в аккаунт}}
-    \label{login}
-    \endminipage\hfill
-    \minipage{0.45\textwidth}
-    % \includegraphics[height=0.42\textheight]{./screenshots/3/register.jpg}
-    \caption{\small{регистрация аккаунта}}
-    \label{register}
-    \endminipage{}
+    \includegraphics[width=\textwidth]{./screenshots/wallet_options}
+    \caption{Возможности кошелька}\label{wallet}
 \end{figure}
 
-
-При долгом нажатии на элементы
-управления button (кнопка) должны появляться всплывающие подсказки. (Рис.~\ref{hint})
-
-Должен быть реализован обучающий фрагмент в разделе help (), содержащий руководство
-пользователя по управлению программой. (Рис.~\ref{help})
-Должно быть отображение индикатора процесса загрузки данных с сервера,
-При отсутствии интернет-соединения должно происходить перенаправление в настройки сети для
-последующего включения интернета .
+Возможности кошелька должны включать в себя 3 функции: генерирования нового
+адреса (пары публичный и приватный ключ), отправки средств с одного адреса на
+другой, а так же просмотр блокчейна (Рис.~\ref{wallet}).
 
 \begin{figure}[h!]
     \centering
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/about.jpg}
-    \caption{\small{просмотр раздела ``о приложении''}}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/help.jpg}
-    \caption{\small{просмотр подсказки пользования приложением}}
-    \label{help}
-    \endminipage\hfill
-    \minipage{0.3\textwidth}
-    % \includegraphics[height=0.38\textheight]{./screenshots/3/hint.jpg}
-    \caption{\small{просмотр всплывающего описания элементов button (кнопок)}}
-    \label{hint}
-    \endminipage{}
+    \includegraphics[width=\textwidth]{./screenshots/gen_kirill}
+    \caption{Генерация адреса {\small kirill}}\label{gen_kirill}
 \end{figure}
 
-\newpage
-\subsubsection{Crawler}
-Все необходимые для реализации программы модули должны быть реализованы (Рис.~\ref{tree})
+При выборе первой опции должен отображаться диалог с требованием ввести имя, и
+дальнейшей генерацией адреса кошелька (пары публичный-приватный ключи) (Рис.~\ref{gen_kirill})
 
 \begin{figure}[h!]
     \centering
-    % \includegraphics[width=0.56\textwidth]{./screenshots/3/tree.png}
-    \caption{\small{структура проекта crawler'a}}
-    \label{tree}
+    \includegraphics[width=\textwidth]{./screenshots/cat}
+    \caption{Просмотр сгенерированных адресов кошельков}\label{cat}
 \end{figure}
 
-\newpage
-Работа crawler'a на Рис.~\ref{crawl_dixy}. При запуске всё работает должно
-работать по описанному в настоящей Пояснительной Записке алгоритму, запросы
-должны отправляться на сервер.
+Адрес кошелька должен записываться в файл с расширением {\small .txt} и
+указанным именем в названии (Рис.~\ref{cat}).
 
 \begin{figure}[h!]
     \centering
-    % \includegraphics[width=0.9\textwidth]{./screenshots/3/crawl_dixy.png}
-    \caption{\small{начало запуска crawler'a}}
-    \label{crawl_dixy}
+    \includegraphics[width=\textwidth]{./screenshots/miner_run}
+    \caption{Лог работы майрена}\label{log1}
 \end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/log_send}
+    \caption{Лог регистрации новой транзакции}\label{log2}
+\end{figure}
+
+При запуске майнера, должен вестись лог о проведённых транзакциях и их
+валидациях (Рис.~\ref{log1}~-~Рис.~\ref{log2}).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/sending}
+    \caption{Процесс отправки средств}\label{sending}
+\end{figure}
+
+В кошельке при отправке условных средств с одного счёта на другой, должны
+требоваться публичный и приватный адреса отправителя, а так же публичный ключ
+получателя (Рис.~\ref{sending}).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{./screenshots/full_chain}
+    \caption{Отображение полной цепочки транзакций}\label{full_chain}
+\end{figure}
+При выборе третей опции в кошельке, должен отобразиться полная цепочка
+транзакций (блокчейн) (Рис.~\ref{full_chain}).
 
 \newpage
 \subsection{Проверка требований к временным характеристикам}
-\subsubsection{Андроид приложение}
-Будут приводится log-сообщения (см. терминологию) из используемого средства разработки.
-
-Время запуска приложения не должно превышать двух секунд (Рис.~\ref{launch})
+\subsubsection{Проверка требований к компоновщику}
+Время запуска приложения не должно превышать 1.05 секунд (Рис.~\ref{launch})
 
 \begin{figure}[h!]
     \centering
-    % \includegraphics[width=0.9\textwidth]{./screenshots/3/lauch_log.png}
-    \caption{\small{log. Запуск приложения}}
+    \includegraphics[width=0.7\textwidth]{./screenshots/runtime}
+    \caption{Лог замера времени}
     \label{launch}
 \end{figure}
 
-
-Время загрузки одной страницы акций не должно превышать двух секунд (Рис.~\ref{loading})
-
-\begin{figure}[h!]
-    \centering
-    % \includegraphics[width=0.9\textwidth]{./screenshots/3/load_log.png}
-    \caption{\small{log. Загрузка акций}}
-    \label{loading}
-\end{figure}
 Все временные требования должны быть соблюдены.
-\subsubsection{Crawler}
-Временные требования к работе crawler'a не предъявлялись.
+\subsubsection{Реализация блокчейна}
+Временные требования к работе реализации блокчейна (майнера и кошелька) не предъявлялись.
