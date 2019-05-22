@@ -56,30 +56,24 @@ generate\_ECDSA\_keys(ret=False)}.  При генерации по умолча�
 
 \begin{center}
 \begin{lstlisting}
-def generate_ECDSA_keys(ret=False):
-    try:
-        sk = dss.SigningKey.generate(curve=dss.SECP256k1)   # this is your sign (private key)
-    except:
-        sk = dss.SigningKey().generate()   # this is your sign (private key)
-    private_key = sk.to_string().hex()  # convert your private key to hex
-    vk = sk.get_verifying_key()  # this is your verification key (public key)
-    try:
-        public_key = vk.to_string().hex()
-    except:
-        public_key = sk.to_string(pub=True)
+def generate_keys(ret=False):
+    if _timed:
+        t1 = time.time()
+    singningkey = dss.SigningKey().generate()
+    private_key = singningkey.to_string()
+    vk = singningkey.getverifyingkey()
+    public_key = vk.to_string().hex()
+    public_key = singningkey.to_string(pub=True)
     if _timed:
         t2 = time.time()
         _write_time(alg_name, 'Key pair generation', alg_bit, t2-t1)
-    try:
-        public_key = base64.b64encode(bytes.fromhex(public_key.decode()))
-    except:
-        public_key = base64.b64encode(bytes.fromhex(public_key))
+    public_key = base64.b64encode(bytes.fromhex(public_key))
     if ret:
         return private_key, public_key.decode()
-    filename = input("Write the name of your new address: ") + ".txt"
-    with open(filename, "w") as f:
-        f.write("Private key: {0}\nWallet address / Public key: {1}".format(private_key, public_key.decode()))
-    print("Your new address and private key are now in the file {0}".format(filename))
+    filename = input('Name of addr: ') + '.txt'
+    with open(filename, 'w') as f:
+        f.write('PrvK: {0}\nWallet addr / PubK: {1}'.format(private_key, public_key.decode()))
+    print('saved{0}'.format(filename))
 \end{lstlisting}\label{lst:creation}
     Листинг \ref{lst:creation}: Генерация пары публичного и приватного ключей
 \end{center}
@@ -96,24 +90,23 @@ def generate_ECDSA_keys(ret=False):
 
 \begin{center}
 \begin{lstlisting}
-def send_transaction(addr_from, private_key, addr_to, amount):
-    try:
-        len_prv = len(private_key)
-    except:
-        len_prv = len(str(private_key))
-    if len_prv == 64 or dss.name == 'gost':
-        signature, message = sign_ECDSA_msg(private_key)
-        url = f'http://localhost:{_port}/txion'
-        payload = {"from": addr_from,
-                   "to": addr_to,
-                   "amount": amount,
-                   "signature": signature.decode(),
-                   "message": message}
-        headers = {"Content-Type": "application/json"}
+def _perform_transaction(from_, prv_key, addr_to, amount):
+    len_prv = len(prv_key)
+
+    if dss.name == 'gost' or len_prv == 64:
+        signature, message = _sign_msg(prv_key)
+        url = f'http://localhost:{_port}/mycoin'
+        payload = {'from': from_,
+                   'to': addr_to,
+                   'amount': amount,
+                   'signature': signature.decode(),
+                   'message': message}
+        headers = {'Content-Type': 'application/json'}
+
         res = requests.post(url, json=payload, headers=headers)
         print(res.text)
     else:
-        print("Wrong address or key length! Verify and try again.")
+        print('Wrong address; Please try again.')
 \end{lstlisting}\label{lst:send}
     Листинг \ref{lst:send}: Отправка сформированного блока в {\small miner.py}
 \end{center}
@@ -159,29 +152,26 @@ NODE\_PENDING\_TRANSACTIONS} и выводится на стандартный �
 
 \begin{center}
 \begin{lstlisting}
-    @app.route('/txion', methods=['GET', 'POST'])
+    @app.route('/mycoin', methods=['GET', 'POST'])
     def transaction():
+        """Each transaction sent to this node gets validated and submitted.
+        Then it waits to be added to the blockchain. Transactions only move
+        coins, they don't create it.
+        """
         if request.method == 'POST':
-            # On each new POST request, we extract the transaction data
-            new_txion = request.get_json()
-            # Then we add the transaction to our list
-            if validate_signature(new_txion['from'], new_txion['signature'], new_txion['message']):
-                NODE_PENDING_TRANSACTIONS.append(new_txion)
-                # Because the transaction was successfully
-                # submitted, we log it to our console
-                print("New transaction")
-                print("FROM: {0}".format(new_txion['from']))
-                print("TO: {0}".format(new_txion['to']))
-                print("AMOUNT: {0}\n".format(new_txion['amount']))
-                # Then we let the client know it worked out
+            new_mycoin = request.get_json()
+            if validate_signature(new_mycoin['from'], new_mycoin['signature'], new_mycoin['message']):
+                WAITING_TRANSACTIONS.append(new_mycoin)
+                print("Got a new transaction")
+                print("FROM: {0}".format(new_mycoin['from']))
+                print("TO: {0}".format(new_mycoin['to']))
+                print("AMOUNT: {0}\n".format(new_mycoin['amount']))
                 return "Transaction submission successful\n"
             else:
                 return "Transaction submission failed. Wrong signature\n"
-        # Send pending transactions to the mining process
         elif request.method == 'GET' and request.args.get("update") == MINER_ADDRESS:
-            pending = json.dumps(NODE_PENDING_TRANSACTIONS)
-            # Empty transaction list
-            NODE_PENDING_TRANSACTIONS[:] = []
+            pending = json.dumps(WAITING_TRANSACTIONS)
+            WAITING_TRANSACTIONS[:] = []
             return pending
 \end{lstlisting}\label{lst:newblock}
     Листинг \ref{lst:newblock}: URL '/txion' в {\small miner.py} для создания нового блока
@@ -190,9 +180,9 @@ NODE\_PENDING\_TRANSACTIONS} и выводится на стандартный �
 
 \begin{center}
 \begin{lstlisting}
-def mine(a, blockchain, node_pending_transactions):
+def mine(a, blockchain, WAITING_TRANSACTIONS):
     BLOCKCHAIN = blockchain
-    NODE_PENDING_TRANSACTIONS = node_pending_transactions
+    WAITING_TRANSACTIONS = WAITING_TRANSACTIONS
     while True:
         if _timed:
             t1 = time.time()
@@ -204,20 +194,20 @@ def mine(a, blockchain, node_pending_transactions):
             a.send(BLOCKCHAIN)
             continue
         else:
-            NODE_PENDING_TRANSACTIONS = requests.get(MINER_NODE_URL + "/txion?update=" + MINER_ADDRESS).content
-            NODE_PENDING_TRANSACTIONS = json.loads(NODE_PENDING_TRANSACTIONS)
-            NODE_PENDING_TRANSACTIONS.append({
+            WAITING_TRANSACTIONS = requests.get(MINER_NODE_URL + "/txion?update=" + MINER_ADDRESS).content
+            WAITING_TRANSACTIONS = json.loads(WAITING_TRANSACTIONS)
+            WAITING_TRANSACTIONS.append({
                 "from": "network",
                 "to": MINER_ADDRESS,
                 "amount": 1})
             new_block_data = {
                 "proof-of-work": proof[0],
-                "transactions": list(NODE_PENDING_TRANSACTIONS)
+                "transactions": list(WAITING_TRANSACTIONS)
             }
+            WAITING_TRANSACTIONS = []
             new_block_index = last_block.index + 1
             new_block_timestamp = time.time()
             last_block_hash = last_block.hash
-            NODE_PENDING_TRANSACTIONS = []
             mined_block = Block(new_block_index, new_block_timestamp, new_block_data, last_block_hash)
             BLOCKCHAIN.append(mined_block)
             try:
@@ -259,11 +249,7 @@ def validate_signature(public_key, signature, message):
         t1 = time.time()
     public_key = (base64.b64decode(public_key)).hex()
     signature = base64.b64decode(signature)
-    try:
-        vk = dss.VerifyingKey().from_string(public_key)
-    except:
-        curve = dss.SECP256k1
-        vk = dss.VerifyingKey.from_string(bytes.fromhex(public_key), curve=curve)
+    vk = dss.VerifyingKey().from_string(public_key)
     try:
         res = vk.verify(signature, message.encode())
         if _timed:
