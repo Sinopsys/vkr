@@ -22,6 +22,7 @@ format (V.Fyodorov@tltsu.ru)]
 \newcommand{\eskd@half@thick}{0.2}
 
 \RequirePackage{keyval}
+\RequirePackage[page]{totalcount}
 
 \define@key{eskd}{height}{\renewcommand{\eskdheight}{#1}}
 \define@key{eskd}{encoding}{\renewcommand{\eskdencoding}{#1}}
@@ -360,7 +361,7 @@ format (V.Fyodorov@tltsu.ru)]
 
 
 % small command just for convenience
-\newcommand{\eskd@totalpages}{Листов \pageref{LastPage}}
+\newcommand{\eskd@totalpages}{Листов \totalpages}
 
 \newcommand{\eskd@makesecond}{%
     \thispagestyle{mysecond}

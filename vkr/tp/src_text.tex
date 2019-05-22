@@ -33,7 +33,7 @@ encoding=utf8
 \usepackage[backend=biber
            ,style=gost-numeric
             ]{biblatex}
-\addbibresource{../library.bib}
+\addbibresource{used_sources.bib}
 \usepackage[titles]{tocloft}
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{5}
@@ -66,6 +66,7 @@ encoding=utf8
 % Custom commands
 % configure eskd
 \titleTop{
+    {\normalsize \hfill ПРИЛОЖЕНИЕ Г}\\
     {\Large ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ \\
         НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ \\
         <<ВЫСШАЯ ШКОЛА ЭКОНОМИКИ>>} \\
@@ -108,6 +109,7 @@ encoding=utf8
 
 \newpage
 \pagenumbering{arabic}
+\setcounter{page}{98}
 \tableofcontents
 
 % --- add my custom headers ---
@@ -120,8 +122,8 @@ encoding=utf8
 \input{used_literature}
 
 % Index
-\newpage
-\eskdListOfChanges
+% \newpage
+% \eskdListOfChanges
 
 % \phantomsection
 % \addcontentsline{toc}{section}{Алфавитный указатель}
