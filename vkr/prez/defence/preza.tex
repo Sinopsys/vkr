@@ -29,6 +29,7 @@
     \pgfplotsset{
         compat=1.12,
     }
+\usepackage{hyperref}
 
 % \usepackage[backend=biber]{biblatex}
 % \addbibresource{used_sources.bib}
@@ -61,7 +62,7 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
 \frametitle{Популярность блокчейна}
     \begin{figure}
         \includegraphics[width=0.85\textwidth]{graph}
-        \caption{\small Рост выручки в индустриях с применением блокчейна [XXX]}
+        \caption{\small Рост выручки в индустриях с применением блокчейна [22]}
         %% CITE Niranjanamurthy, M., Nithya, B.N. & Jagannatha, S. Cluster Comput (2018). https://doi.org/10.1007/s10586-018-2387-5
     \end{figure}
     % \begin{multicols}{2}
@@ -101,21 +102,21 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
 \begin{frame}
 \frametitle{Определения}
 \begin{itemize}
-\scriptsize
-    \item Распределённый реестр (Distributed Ledger) --- распределённая база
+\small
+    \item \emph{Распределённый реестр (Distributed Ledger)} --- распределённая база
           данных между сетевыми узлами. Каждый из узлов может получать данные
           других, при этом храня полную копию реестра.  Обновления этих
           узлов происходят независимо друг от друга
-    \item Блокчейн --- постоянно растущий список записей, называемых блоками,
+    \item \emph{Блокчейн} --- постоянно растущий список записей, называемых блоками,
           которые связаны и защищены с помощью криптографии. Он копируется его
           пользователями и устойчив к модификации
-    \item Приватный и публичный ключи --- сущности системы ассиметричного
+    \item \emph{Приватный и публичный ключи} --- сущности системы ассиметричного
           шифрования для безопасной передачи сообщений между парой субъектов
-    \item Цифровая подпись --- реквизит электронного документа, полученный в
+    \item \emph{Цифровая подпись} --- реквизит электронного документа, полученный в
           результате криптографического преобразования информации и позволяющий
           проверить отсутствие искажения информации, принадлежность
           подписи владельцу сертификата ключа подписи
-    \item Майнер --- лицо, позволяющее обеспечить достижение консенсуса о том,
+    \item \emph{Майнер} --- лицо, обеспечивающее достижение консенсуса о том,
           какие транзакции считать валидными с целью предотвращения траты уже
           использованной в другой транзакции монеты
 \end{itemize}
@@ -125,7 +126,7 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \small
     \frametitle{Цель и задачи}
     Расширить существующую классификацию по использованию в реестрах
-    [XXX] алгоритмов и протоколов, а так же создать приложение для
+    [30] алгоритмов и протоколов, а так же создать приложение для
     автоматизации создания кода распределённого реестра.\\
 
     {\bfseries \color{HSEblue} Задачи}:
@@ -141,206 +142,124 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
               алгоритмов блокчейна
         \item Автоматизировать работу системы с набором существующих алгоритмов
     \end{itemize}
-    % \begin{figure}
-    %     \includegraphics[height=0.5\columnwidth]{current_protocols}
-    %     \caption{Криптопротокол по состоянию на 2014 год [15]}
-    % \end{figure}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Цель и задачи работы}
-    \textbf{Цель}: Анализ и классификация актуальных криптографических
-    алгоритмов для распределённых реестров в мире\\
-    \textbf{Задачи}:
+    % \centering
+    \begin{figure}
+    \includegraphics[width=3cm]{rg_logo}\pause
+    \vfill
+    \includegraphics[width=6cm]{decentr_logo}\pause
+    \includegraphics[width=3cm]{wiki_logo}\pause
+    \includegraphics[width=3cm]{btcwiki_logo}\pause
+    \hfill
+    \includegraphics[width=2cm]{reddit_logo}\pause
+    \includegraphics[width=2cm]{springer_logo}
+        \caption{Источники информации}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Классификация от Tim Swanson [30]}
+    \begin{figure}
+        \includegraphics[width=0.9\columnwidth]{current_protocols}
+        \caption{Криптопротокол по состоянию на 2014 год [30]}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Обновлённая классификция}
+    \begin{figure}
+        \includegraphics[width=0.8\columnwidth]{myprotocol_w_title}
+        \caption{Криптопротокол по состоянию на 2019 год}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Программа}
+    \begin{figure}
+        \includegraphics[height=0.75\textheight]{uc}
+        \caption{Диаграмма use case}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Особенности архитектуры}
     \begin{itemize}
-        \item Выявить популярные распределённые реестры; выделить и изучить
-              криптографические алгоритмы в них
-        \item Изучить особенности реализации алгоритмов
-        \item Расположить их на диаграмме Эйлера-Венна для создания новой классификации
-        \item Написать библиотеку криптографических алгоритмов и протоколов
+        % \item Не устанавливает лишних алгоритмов, а только то что выбрал
+        %       \textbf{пользователь}
+         \item \textbf{Сервер автообновления} поддерживает консистентность
+              реализаций алгоритмов
+         \item \textbf{Continuous integration} позволяет отслеживать
+              работоспособность автообновляемой версии реализаций алгоритмов
+        \item Спроектировано для упрощения дальнейшей \textbf{масштабируемости}
+        \item Реализации алгоритмов были адаптированы под
+              \textbf{Python3}
+        \item Использование \textbf{конфигурационных} файлов вместо разрастания
+              количества аргументов командной строки
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Распределённые реестры}
-    \begin{figure}[h]
-        \captionsetup{labelformat=parens}
-        \Tree [.DL [.DAG ] [.Blockchain ] [.Hybrids\ \&\ Others ]]
-        \caption{Виды распределённых реестров}\label{graph_reester}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Классификация по открытости}
-    \begin{multicols}{3}
-        \textbf{Канада}
-        \begin{itemize}
-            \item Public
-            \item Private
-            \item Consortium
-        \end{itemize}
-        \columnbreak
-        \textbf{Великобритания}
-         \begin{itemize}
-                 \small
-             \item Permissioned private
-             \item Permissioned public
-             \item Unpermissioned public
-         \end{itemize}
-        \columnbreak
-        \textbf{Россия}
-        \begin{itemize}
-            \item Public
-            \item Private
-        \end{itemize}
-    \end{multicols}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Алгоритмы и протоколы}
-    \begin{multicols}{3}
-        \textbf{Протоколы консенсусa}
-        \vspace{0.35cm}
-        \begin{itemize}
-            \item PoW
-            \item PoS
-            \item DPoS
-            \item PoA
-            \item PoWeight
-            \item BFT
-        \end{itemize}
-        \columnbreak
-        \textbf{Алгоритмы хэширования}
-        \vspace{0.56cm}
-         \begin{itemize}
-             \item SHA-256
-             \item SHA-512
-             \item Scrypt
-             \item KECCAK-256
-             \item Ethash
-             \item X11
-             \item X17
-             \item Lyra2rev2
-             \item myr-groestl
-             \item blake2s
-         \end{itemize}
-        \columnbreak
-        \textbf{Алгоритмы генерации случайных чисел}
-        \begin{itemize}
-            \item DRBG
-            \item CPRNG
-        \end{itemize}
-    \end{multicols}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Существующая классификация криптопротоколов}
-    \framesubtitle{На 2014 год}
-    \textbf{Задача: } Расширение классификации
-
+    \frametitle{Технологии реализации}
     \begin{figure}
-        \includegraphics[width=0.75\columnwidth]{current_protocols.png}
-        \caption{Криптопротокол по состоянию на 2014 год [15]}
+        \includegraphics[width=\columnwidth]{tech.png}
+        \caption{\small Инструменты реализации}
     \end{figure}
 \end{frame}
 
+\setbeamercolor{background canvas}{bg=HSEblue}
 \begin{frame}
-    \frametitle{Существующая классификация криптопротоколов*}
-    \framesubtitle{На 2019 год}
-    \textbf{Результат: } Расширенная классификация
+    \centering
+    \LARGE \bfseries \color{white}
+    Демонстрация
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
 
-    \begin{figure}
-        \includegraphics[width=0.65\columnwidth]{myprotocol_w_title.png}
-        \caption{Криптопротокол по состоянию на 2019 год*}
-    \end{figure}
-    \begin{flushright}
-        \vspace{-0.5cm}
-        \tiny
-        *Альфа версия
-    \end{flushright}
+\begin{frame}
+    \frametitle{Выводы}
+    \begin{itemize}
+        \item[\checkmark] Устаревшая классификация обновлена
+        \item[\checkmark] В новой отражены не только новые алгоритмы и
+                          протоколы, но и современные распределённые реестры
+        \item[\checkmark] Разработано средство автоматизации программирования
+        \item[\checkmark] Создан автоматизированный процесс по работе с кодами
+                          реализаций алгоритмов и их обновлению
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Общее}
-    \framesubtitle{Сравнительный анализ}
-    \begin{figure}
-        \includegraphics[width=0.79\columnwidth]{sravn1.png}
-        \caption{Необходимые ресурсы для анализа}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Алгоритмы}
-    \framesubtitle{Сравнительный анализ}
-    \begin{figure}
-        \includegraphics[width=0.6\columnwidth]{sravn2.png}
-        \caption{Алгоритмы хэширования, протоколы консенсуса и др.}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Алгоритмы, обеспечивающие приватность}
-    \framesubtitle{Сравнительный анализ}
-    \begin{figure}
-        \includegraphics[width=\columnwidth]{sravn3.png}
-        \caption{Алгоритмы, обеспечивающие приватность}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Методы, алгоритмы и технологии}
-    \begin{multicols}{2}
-        \begin{itemize}
-            \item Сравнительный анализ алгоритмов и протоколов
-            \item Язык Python 3.6.5
-            \item {\LaTeX} (дистрибутив XeTeX) для презентаций и текста
-            \item YAML 1.2 как язык конфигурации библиотеки
-            \item Лицензии на использование и распространение кодов
-        \end{itemize}
-        \bigskip
-        \columnbreak
-        \begin{figure}
-            \includegraphics[width=\columnwidth]{tech.png}
-        \end{figure}
-    \end{multicols}
-\end{frame}
-
-\begin{frame}
-    % \frametitle{}
-    \begin{multicols}{2}
-        \begin{center}
-            \textbf{Сделано}
-        \end{center}
-        \begin{itemize}
-            \item Исследовательская часть {\bfseries \color{yellow!60!green}(70\%)}
-            \item Программа {\bfseries \color{green!75!blue}(80\%)}
-            \item Документация {\bfseries \color{red!75!blue}(25\%)}
-        \end{itemize}
-        \bigskip
-        \columnbreak
-        \begin{center}
-            \textbf{\#TODO}
-        \end{center}
-        \begin{itemize}
-            \item Завершить классификацию
-            \item Доработать полный обзор рассмотренных алгоритмов
-            \item Проверить лицензии всех предполагаемых используемых кодов
-            \item Добавить в программу генерацию кода (Python Metaprogramming)
-        \end{itemize}
-    \end{multicols}
+    \frametitle{Направления дальнейшей работы}
+    \begin{itemize}
+        \item Новые реестры
+        \item Новые алгоритмы
+        \item Реализации алгоритмов Python $\rightarrow$ С
+        \item Исследование новых реестров
+        \item Поддержание актуальности классификации
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Список используемых источников}
     \begin{figure}
-        \includegraphics[width=\columnwidth]{lit1.png}
+        \centering
+        \includegraphics[width=0.85\textwidth]{lib1}
     \end{figure}
 \end{frame}
 
 \begin{frame}
     \frametitle{Список используемых источников}
     \begin{figure}
-        \includegraphics[width=\columnwidth]{lit2.png}
+        \centering
+        \includegraphics[width=0.85\textwidth]{lib2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Список используемых источников}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{lib3}
     \end{figure}
 \end{frame}
 
@@ -356,7 +275,11 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
 
 \bigskip\bigskip
 
-{\insertinstitute}
+{\scriptsize \color{HSEblue}
+    +7-910-008-3926\\
+    \href{mailto:kikupriyanov@edu.hse.ru}{kikupriyanov@edu.hse.ru}\\
+    \href{mailto:kupriyanovkirill@gmail.com}{kupriyanovkirill@gmail.com}\\
+    \href{https://t.me/SsinopsysS}{@SsinopsysS}}
 
 \bigskip\bigskip
 
