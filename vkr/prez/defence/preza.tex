@@ -23,6 +23,9 @@
 \usepackage{multicol}       % Несколько колонок
 \graphicspath{{images/}}    % Папка с картинками
 
+
+\usepackage{listings}
+
 % графики всякие
 \usepackage{qtree}
 \usepackage{pgfplots}
@@ -110,7 +113,7 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \item \emph{Блокчейн} --- постоянно растущий список записей, называемых блоками,
           которые связаны и защищены с помощью криптографии. Он копируется его
           пользователями и устойчив к модификации
-    \item \emph{Приватный и публичный ключи} --- сущности системы ассиметричного
+    \item \emph{Приватный и публичный ключи} --- сущности системы асимметричного
           шифрования для безопасной передачи сообщений между парой субъектов
     \item \emph{Цифровая подпись} --- реквизит электронного документа, полученный в
           результате криптографического преобразования информации и позволяющий
@@ -126,13 +129,13 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \small
     \frametitle{Цель и задачи}
     Расширить существующую классификацию по использованию в реестрах
-    [30] алгоритмов и протоколов, а так же создать приложение для
+    [30] алгоритмов и протоколов, а также создать приложение для
     автоматизации создания кода распределённого реестра.\\
 
     {\bfseries \color{HSEblue} Задачи}:
     \begin{itemize}
         \item Выявить популярные распределённые реестры; выделить и изучить
-              криптографические алгоритмы и протоколы в них
+              криптографические алгоритмы и протоколы в ниммх
         \item Расположить их на диаграмме Эйлера-Венна для создания обновлённой
               классификации
         \item Реализовать код блокчейна с интерфейсом встраивания вариаций
@@ -141,6 +144,20 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
               сгенерировать код работающего с использованием выбранных
               алгоритмов блокчейна
         \item Автоматизировать работу системы с набором существующих алгоритмов
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{План}
+    \begin{itemize}
+        \item Вступление
+        \item Источники информации
+        \item Результат обновления классификации
+        \item Описание программного решения
+        \item Схема работы
+        \item Особенности архитектуры
+        \item Технологии реализации
+        \item Заключение
     \end{itemize}
 \end{frame}
 
@@ -155,7 +172,7 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
     \hfill
     \includegraphics[width=2cm]{reddit_logo}\pause
     \includegraphics[width=2cm]{springer_logo}
-        \caption{Источники информации}
+        \caption{Источники информации ([1-2], [36], [39], [6], [22])}
     \end{figure}
 \end{frame}
 
@@ -174,6 +191,27 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
         \includegraphics[width=0.8\columnwidth]{myprotocol_w_title}
         \caption{Криптопротокол по состоянию на 2019 год}
     \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Аналоги предлагаемого программного решения}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\columnwidth]{analogues}
+        \includegraphics[width=0.6\columnwidth]{analogues_logos}
+        \caption{\scriptsize Аналоги программного решения. Codecreator [7] и Azure BaaS [20]}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Программа}
+    \Large
+    \begin{center}
+    \begin{enumerate}
+        \item Компоновщик
+        \item Реализация блокчейна
+    \end{enumerate}
+    \end{center}
 \end{frame}
 
 \begin{frame}
@@ -220,6 +258,22 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
         \item Использование \textbf{конфигурационных} файлов вместо разрастания
               количества аргументов командной строки
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Сервер автообновления}
+    \begin{figure}
+        \includegraphics[width=\columnwidth]{server}
+        \caption{\small Процесс работы автообновления}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Сервер автообновления}
+    \begin{figure}
+        \includegraphics[width=\columnwidth]{cron}
+        \caption{\small Регулярное (ежедневное) обновление}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -307,6 +361,24 @@ Cryptographic Algorithms and Protocols for Distributed Ledgers}
 
 {\large \insertdate}
 \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Процесс работы компоновщика}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{sequence}
+        \caption{\small Диаграмма последовательности работы компоновщика}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Схема хранилища}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.67\textwidth]{db}
+        \caption{Схема хранилища}
+    \end{figure}
 \end{frame}
 
 \end{document}
